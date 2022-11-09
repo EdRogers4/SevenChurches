@@ -3,8 +3,9 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -22,10 +23,12 @@ MonoBehaviour:
   m_ShowSelectedElementSprite: 0
   m_OverwriteTouchOpertation: 0
   m_DragAndTouch: 1
-  m_MenuHeader: {fileID: 11400000, guid: 409f89eaca0314740be8d11b4c9288ba, type: 2}
+  m_MenuHeader: {fileID: 0}
   m_ElementSnapOverwrite: 0
   m_ElementSnap: 0
   m_MenuElements:
   - {fileID: 11400000, guid: 7d18266212f7bc4408ba60a3e6113eb6, type: 2}
   - {fileID: 11400000, guid: e908e72100bb54c4296e9312d6168f9f, type: 2}
   - {fileID: 11400000, guid: 579194310a6e8f64faedc375676ad91d, type: 2}
+  - {fileID: 11400000, guid: 7c9f430c149fd5f43aded077a6fbbdd6, type: 2}
+  m_CustomMenuElements: []

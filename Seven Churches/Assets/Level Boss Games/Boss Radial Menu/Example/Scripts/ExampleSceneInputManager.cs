@@ -46,6 +46,10 @@ namespace LBG.UI.Radial
                         case "Background Colour":
                             ChangeLayer("Background Colour", ExampleSettings.CurrentBackgroundIndex, ExampleSettings.BackgroundColours);
                             break;
+                        
+                        case "Cancel":
+	                        ChangeLayer("Main");
+	                        break;
 
                         default:
                             Debug.LogWarning("No button event handler for " + buttonEvent + " in layer " + layerEvent);
