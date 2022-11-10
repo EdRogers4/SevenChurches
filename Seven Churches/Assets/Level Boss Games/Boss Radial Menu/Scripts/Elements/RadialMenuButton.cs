@@ -21,6 +21,14 @@ namespace LBG.UI.Radial
 		/// The event that is called in the input manager
 		/// </summary>
 		public string m_ElementEvent;
+		
+		[Header("Event Index (Must be unique for each button in a layer")]
+		[Tooltip("The index used when calling church events")]
+		/// <summary>
+		/// The index associated with the element
+		/// </summary>
+		public int m_ElementIndex;
+
 
 		#endregion
 		
@@ -29,6 +37,10 @@ namespace LBG.UI.Radial
 		/// </summary>
 		public override Type Interact(RadialBase menu,string layerEvent)
 		{
+			if (m_ElementIndex > 0)
+			{
+				menu.m_InputManager.GetComponent<ExampleSceneInputManager>().currentChurch = m_ElementIndex;
+			}
 
 			menu.m_InputManager.ProcessButton(layerEvent, m_ElementEvent);
 

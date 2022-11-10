@@ -925,6 +925,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da7fe1de5d75b924c8a25a8ba2e74a2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSourceMusic: {fileID: 519420033}
+  song:
+  - {fileID: 8300000, guid: 3fee699f86b3c0647897e2f79c03b292, type: 3}
+  - {fileID: 8300000, guid: 7d4c0878264e7b146b57bbfd60891151, type: 3}
+  - {fileID: 8300000, guid: 35215d5689991f54f9a323cd2ffb1cc4, type: 3}
+  - {fileID: 8300000, guid: 272e937ac7433344e954535dc2f16d57, type: 3}
+  - {fileID: 8300000, guid: 490f558107a7d114193b38c687742573, type: 3}
+  - {fileID: 8300000, guid: c368a1f1b455ab149a46408d35e24d85, type: 3}
+  - {fileID: 8300000, guid: 2df498d6c4e406c408657098bb9477cc, type: 3}
+  currentChurch: 0
 --- !u!114 &648785794
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -16,3 +16,4 @@ MonoBehaviour:
   m_SpriteColour: {r: 0.122641504, g: 0.122641504, b: 0.122641504, a: 1}
   m_ElementName: Ephesus
   m_ElementEvent: Church1
+  m_ElementIndex: 1
