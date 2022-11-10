@@ -1753,7 +1753,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: CREATED BY <b>[NAME HERE]</b>
+  m_text: '<b>INSPIRED</b>  BY
+
+    THE  <b>SEVEN  SPIRITS  OF  GOD</b>'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 52cb95421939b3343ade2a7579e71c06, type: 2}
   m_sharedMaterial: {fileID: 21307179227807236, guid: 52cb95421939b3343ade2a7579e71c06, type: 2}
@@ -2113,7 +2115,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: A <b>[YOUR COMPANY]</b> PRODUCTION
+  m_text: "AN  <b>INTERPRETATION</b> \nOF  THE  <b>SEVEN  CHURCHES</b>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 52cb95421939b3343ade2a7579e71c06, type: 2}
   m_sharedMaterial: {fileID: 21307179227807236, guid: 52cb95421939b3343ade2a7579e71c06, type: 2}
