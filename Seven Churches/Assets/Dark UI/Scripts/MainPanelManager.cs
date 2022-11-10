@@ -31,11 +31,17 @@ namespace Michsky.UI.Dark
         void Start()
         {
             currentPanel = panels[currentPanelIndex];
-            currentPanelAnimator = currentPanel.GetComponent<Animator>();
-            currentPanelAnimator.Play(panelFadeIn);
 
-            if (enableHomeBlur == true)
+            if (currentPanelAnimator != null)
+            {
+                currentPanelAnimator = currentPanel.GetComponent<Animator>();
+                currentPanelAnimator.Play(panelFadeIn);
+            }
+
+            if (enableHomeBlur == true && homeBlurManager != null)
+            {
                 homeBlurManager.BlurInAnim();
+            }
         }
 
         public void OpenFirstTab()
