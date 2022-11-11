@@ -8,6 +8,7 @@ namespace LBG.UI.Radial
 	{
 		[SerializeField] private AudioSource audioSourceMusic;
 		[SerializeField] private AudioClip[] song;
+		[SerializeField] private RadialLayerButtons layerMenu;
 		public int currentChurch;
 		private int currentSong;
 		
@@ -24,7 +25,7 @@ namespace LBG.UI.Radial
 				audioSourceMusic.clip = song[currentChurch - 1];
 				audioSourceMusic.Play();
 			}
-			
+
 			switch(layerEvent)
             {
                 case "Main":
