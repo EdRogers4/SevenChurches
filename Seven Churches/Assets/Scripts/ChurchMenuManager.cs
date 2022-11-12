@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace LBG.UI.Radial
 {
-	public class ExampleSceneInputManager : RadialMenuInputManager
+	public class ChurchMenuManager : RadialMenuInputManager
 	{
 		[SerializeField] private AudioSource audioSourceMusic;
 		[SerializeField] private AudioClip[] song;

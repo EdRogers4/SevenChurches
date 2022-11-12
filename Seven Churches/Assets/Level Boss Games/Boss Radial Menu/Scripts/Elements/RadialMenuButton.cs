@@ -39,7 +39,7 @@ namespace LBG.UI.Radial
 		{
 			if (m_ElementIndex > 0)
 			{
-				menu.m_InputManager.GetComponent<ExampleSceneInputManager>().currentChurch = m_ElementIndex;
+				menu.m_InputManager.GetComponent<ChurchMenuManager>().currentChurch = m_ElementIndex;
 			}
 
 			menu.m_InputManager.ProcessButton(layerEvent, m_ElementEvent);
