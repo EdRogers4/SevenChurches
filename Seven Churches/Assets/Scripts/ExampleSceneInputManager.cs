@@ -1,6 +1,5 @@
 using UnityEngine;
-using System.Collections.Generic;
-using Mono.Cecil.Cil;
+using UnityEngine.UI;
 
 namespace LBG.UI.Radial
 {
@@ -8,6 +7,8 @@ namespace LBG.UI.Radial
 	{
 		[SerializeField] private AudioSource audioSourceMusic;
 		[SerializeField] private AudioClip[] song;
+		[SerializeField] private Sprite[] animal;
+		[SerializeField] private Image imageAnimal;
 		[SerializeField] private RadialLayerButtons layerMenu;
 		public int currentChurch;
 		private int currentSong;
@@ -24,6 +25,7 @@ namespace LBG.UI.Radial
 				currentSong = currentChurch;
 				audioSourceMusic.clip = song[currentChurch - 1];
 				audioSourceMusic.Play();
+				imageAnimal.sprite = animal[currentChurch];
 			}
 
 			switch(layerEvent)
