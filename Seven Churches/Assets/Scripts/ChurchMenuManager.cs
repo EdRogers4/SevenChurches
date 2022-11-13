@@ -8,6 +8,10 @@ namespace LBG.UI.Radial
 		[SerializeField] private AudioSource audioSourceMusic;
 		[SerializeField] private AudioClip[] song;
 		[SerializeField] private Sprite[] animal;
+		[SerializeField] private string[] textChurch;
+		[SerializeField] private string[] textLeader;
+		[SerializeField] private string[] textTrait;
+		[SerializeField] private string[] textQuote;
 		[SerializeField] private Image imageAnimal;
 		[SerializeField] private RadialLayerButtons layerMenu;
 		public int currentChurch;
