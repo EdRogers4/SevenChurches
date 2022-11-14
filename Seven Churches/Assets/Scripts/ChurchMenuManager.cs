@@ -1,4 +1,6 @@
+using TMPro;
 using UnityEngine;
+using System.Collections;
 using UnityEngine.UI;
 
 namespace LBG.UI.Radial
@@ -8,20 +10,148 @@ namespace LBG.UI.Radial
 		[SerializeField] private AudioSource audioSourceMusic;
 		[SerializeField] private AudioClip[] song;
 		[SerializeField] private Sprite[] animal;
+		[SerializeField] private TextMeshProUGUI[] textObjects;
+		[SerializeField] private string titleChurch;
+		[SerializeField] private string titleLeader;
+		[SerializeField] private string titleObjective;
 		[SerializeField] private string[] textChurch;
 		[SerializeField] private string[] textLeader;
-		[SerializeField] private string[] textTrait;
+		[SerializeField] private string[] textObjective;
 		[SerializeField] private string[] textQuote;
+		[SerializeField] private float speedTextSlow;
+		[SerializeField] private float speedTextFast;
+		[SerializeField] private float speedTextTransition;
 		[SerializeField] private Image imageAnimal;
 		[SerializeField] private RadialLayerButtons layerMenu;
 		public int currentChurch;
 		private int currentSong;
-		
+		private string stringCheck;
+
 		/// <summary>
 		/// Process a button based on that layers event name and the buttons event name
 		/// </summary>
 		/// <param name="layerEvent">Event name of the layer</param>
 		/// <param name="buttonEvent">Event name of the button</param>
+
+		private void CheckForLineBreak(int quoteIndex, int charIndex)
+		{
+			stringCheck = "";
+			stringCheck += textQuote[quoteIndex][charIndex];
+						
+			if (stringCheck == "–")
+			{
+				textObjects[2].text += "<br>";
+			}
+		}
+
+		private IEnumerator AnimateTitleChurch()
+		{
+			for (int i = 0; i < titleChurch.Length; i++)
+			{
+				yield return new WaitForSeconds(speedTextSlow);
+				textObjects[0].text += titleChurch[i];
+			}
+
+			textObjects[0].text += "<b>";
+			StartCoroutine(AnimateTextChurch());
+		}
+		
+		private IEnumerator AnimateTextChurch()
+		{
+			for (int i = 0; i < textChurch[currentChurch - 1].Length; i++)
+			{
+				yield return new WaitForSeconds(speedTextSlow);
+				textObjects[0].text += textChurch[currentChurch - 1][i];
+			}
+
+			yield return new WaitForSeconds(speedTextTransition);
+			StartCoroutine(AnimateTitleLeader());
+		}
+		
+		private IEnumerator AnimateTitleLeader()
+		{
+			for (int i = 0; i < titleLeader.Length; i++)
+			{
+				yield return new WaitForSeconds(speedTextSlow);
+				textObjects[1].text += titleLeader[i];
+			}
+
+			textObjects[1].text += "<b>";
+			StartCoroutine(AnimateTextLeader());
+		}
+
+		private IEnumerator AnimateTextLeader()
+		{
+			for (int i = 0; i < textLeader[currentChurch - 1].Length; i++)
+			{
+				textObjects[1].text += textLeader[currentChurch - 1][i];
+				yield return new WaitForSeconds(speedTextSlow);
+			}
+
+			textObjects[1].text += "</b>";
+			yield return new WaitForSeconds(speedTextTransition);
+			StartCoroutine(AnimateTitleObjective());
+		}
+
+		private IEnumerator AnimateTitleObjective()
+		{
+			for (int i = 0; i < titleObjective.Length; i++)
+			{
+				yield return new WaitForSeconds(speedTextSlow);
+				textObjects[1].text += titleObjective[i];
+			}
+
+			textObjects[1].text += "<b>";
+			StartCoroutine(AnimateTextObjective());
+		}
+
+		private IEnumerator AnimateTextObjective()
+		{
+			for (int i = 0; i < textObjective[currentChurch - 1].Length; i++)
+			{
+				textObjects[1].text += textObjective[currentChurch - 1][i];
+				yield return new WaitForSeconds(speedTextSlow);
+			}
+
+			yield return new WaitForSeconds(speedTextTransition);
+			StartCoroutine(AnimateTextQuote());
+		}
+
+		private IEnumerator AnimateTextQuote()
+		{
+			if (currentChurch != 4)
+			{
+				for (int i = 0; i < textQuote[currentChurch - 1].Length; i++)
+				{
+					if (currentChurch == 1)
+					{
+						var quoteIndex = currentChurch - 1;
+						CheckForLineBreak(quoteIndex, i);
+					}
+
+					textObjects[2].text += textQuote[currentChurch - 1][i];
+					yield return new WaitForSeconds(speedTextFast);
+				}
+			}
+			else
+			{
+				for (int i = 0; i < textQuote[7].Length; i++)
+				{
+					CheckForLineBreak(7,i);
+					textObjects[2].text += textQuote[7][i];
+					yield return new WaitForSeconds(speedTextFast);
+				}
+				
+				yield return new WaitForSeconds(speedTextTransition);
+					
+				for (int i = 0; i < textQuote[currentChurch - 1].Length; i++)
+				{
+					textObjects[3].text += textQuote[currentChurch - 1][i];
+					yield return new WaitForSeconds(speedTextFast);
+				}
+			}
+		}
+
 		public override void ProcessButton(string layerEvent, string buttonEvent)
 		{
 			if (currentSong != currentChurch)
@@ -30,6 +160,11 @@ namespace LBG.UI.Radial
 				audioSourceMusic.clip = song[currentChurch - 1];
 				audioSourceMusic.Play();
 				imageAnimal.sprite = animal[currentChurch];
+				textObjects[0].text = "";
+				textObjects[1].text = "";
+				textObjects[2].text = "";
+				textObjects[3].text = "";
+				StartCoroutine(AnimateTitleChurch());
 			}
 
 			switch(layerEvent)
