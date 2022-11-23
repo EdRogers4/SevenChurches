@@ -9,6 +9,7 @@ public class SelectionManager : MonoBehaviour
 	[SerializeField] private AudioSource audioSourceMusic;
 	[SerializeField] private AudioClip[] song;
 	[SerializeField] private Sprite[] animal;
+	[SerializeField] private Sprite noAnimal;
 	[SerializeField] private TextMeshProUGUI[] textObjects;
 	[SerializeField] private string titleChurch;
 	[SerializeField] private string titleLeader;
@@ -17,6 +18,8 @@ public class SelectionManager : MonoBehaviour
 	[SerializeField] private string[] textLeader;
 	[SerializeField] private string[] textObjective;
 	[SerializeField] private string[] textQuote;
+	[SerializeField] private string textName;
+	[SerializeField] private string[] textScripture;
 	[SerializeField] private float speedTextSlow;
 	[SerializeField] private float speedTextFast;
 	[SerializeField] private float speedTextTransition;
@@ -145,6 +148,27 @@ public class SelectionManager : MonoBehaviour
 		}
 	}
 
+	private IEnumerator AnimateTextScripture()
+	{
+		for (int i = 0; i < textName.Length; i++)
+		{
+			textObjects[4].text += textName[i];
+			yield return new WaitForSeconds(speedTextSlow);
+		}
+
+		for (int i = 0; i < textScripture[0].Length; i++)
+		{
+			textObjects[5].text += textScripture[0][i];
+			yield return new WaitForSeconds(speedTextFast);
+		}
+		
+		for (int i = 0; i < textScripture[1].Length; i++)
+		{
+			textObjects[6].text += textScripture[1][i];
+			yield return new WaitForSeconds(speedTextFast);
+		}
+	}
+
 	public void ButtonSelect(int button)
 	{
 		StopAllCoroutines();
@@ -155,13 +179,30 @@ public class SelectionManager : MonoBehaviour
 			currentSong = currentButton;
 			audioSourceMusic.clip = song[currentButton];
 			audioSourceMusic.Play();
-			imageAnimal.sprite = animal[currentButton - 1];
 			textObjects[0].text = "";
 			textObjects[1].text = "";
 			textObjects[2].text = "";
 			textObjects[3].text = "";
-			StartCoroutine(AnimateTitleChurch());
+			textObjects[4].text = "";
+			textObjects[5].text = "";
+			textObjects[6].text = "";
+			textObjects[7].text = "";
+
+			if (currentButton > 0)
+			{
+				imageAnimal.sprite = animal[currentButton - 1];
+				StartCoroutine(AnimateTitleChurch());
+			}
+			else
+			{
+				imageAnimal.sprite = noAnimal;
+				StartCoroutine(AnimateTextScripture());
+			}
 		}
 	}
-		
+
+	public void CloseApplication()
+	{
+		Application.Quit();
+	}
 }
