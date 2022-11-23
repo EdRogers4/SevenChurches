@@ -7,7 +7,9 @@ using UnityEngine.UI;
 public class SelectionManager : MonoBehaviour
 {
 	[SerializeField] private AudioSource audioSourceMusic;
+	[SerializeField] private AudioSource audioSourceSFX;
 	[SerializeField] private AudioClip[] song;
+	[SerializeField] private AudioClip click;
 	[SerializeField] private Sprite[] animal;
 	[SerializeField] private Sprite noAnimal;
 	[SerializeField] private TextMeshProUGUI[] textObjects;
@@ -23,10 +25,15 @@ public class SelectionManager : MonoBehaviour
 	[SerializeField] private float speedTextSlow;
 	[SerializeField] private float speedTextFast;
 	[SerializeField] private float speedTextTransition;
+	[SerializeField] private float speedTextName;
 	[SerializeField] private Image imageAnimal;
+	[SerializeField] private Button[] buttons;
+	[SerializeField] private Sprite[] spriteUnselected;
+	[SerializeField] private Sprite[] spriteSelected;
 	private int currentButton;
 	private int currentSong;
 	private string stringCheck;
+	private bool isFirstSelection;
 
 	private void CheckForLineBreak(int quoteIndex, int charIndex)
 	{
@@ -114,21 +121,15 @@ public class SelectionManager : MonoBehaviour
 
 	private IEnumerator AnimateTextQuote()
 	{
-		if (currentButton != 4)
+		if (currentButton != 4 && currentButton != 1)
 		{
 			for (int i = 0; i < textQuote[currentButton - 1].Length; i++)
 			{
-				if (currentButton == 1)
-				{
-					var quoteIndex = currentButton;
-					CheckForLineBreak(quoteIndex, i);
-				}
-
 				textObjects[2].text += textQuote[currentButton - 1][i];
 				yield return new WaitForSeconds(speedTextFast);
 			}
 		}
-		else
+		else if (currentButton == 4)
 		{
 			//textObjects
 			for (int i = 0; i < textQuote[7].Length; i++)
@@ -146,6 +147,21 @@ public class SelectionManager : MonoBehaviour
 				yield return new WaitForSeconds(speedTextFast);
 			}
 		}
+		else if (currentButton == 1)
+		{
+			for (int i = 0; i < textQuote[currentButton - 1].Length; i++)
+			{
+				CheckForLineBreak(1, i);
+				textObjects[2].text += textQuote[currentButton - 1][i];
+				yield return new WaitForSeconds(speedTextFast);
+			}
+
+			for (int i = 0; i < textQuote[8].Length; i++)
+			{
+				textObjects[3].text += textQuote[8][i];
+				yield return new WaitForSeconds(speedTextFast);
+			}
+		}
 	}
 
 	private IEnumerator AnimateTextScripture()
@@ -153,7 +169,7 @@ public class SelectionManager : MonoBehaviour
 		for (int i = 0; i < textName.Length; i++)
 		{
 			textObjects[4].text += textName[i];
-			yield return new WaitForSeconds(speedTextSlow);
+			yield return new WaitForSeconds(speedTextName);
 		}
 
 		for (int i = 0; i < textScripture[0].Length; i++)
@@ -171,33 +187,63 @@ public class SelectionManager : MonoBehaviour
 
 	public void ButtonSelect(int button)
 	{
-		StopAllCoroutines();
 		currentButton = button;
 		
 		if (currentSong != button)
 		{
-			currentSong = currentButton;
+			NewSelection();
+		}
+
+		for (int i = 0; i < buttons.Length; i++)
+		{
+			buttons[i].image.sprite = spriteUnselected[i];
+		}
+		
+		buttons[currentButton].image.sprite = spriteSelected[currentButton];
+
+		if (!isFirstSelection && currentButton == 0)
+		{
+			NewSelection();
+		}
+	}
+
+	public void NewSelection()
+	{
+		StopAllCoroutines();
+		currentSong = currentButton;
+
+		if (!isFirstSelection && currentButton == 0)
+		{
+			
+		}
+		else
+		{
 			audioSourceMusic.clip = song[currentButton];
 			audioSourceMusic.Play();
-			textObjects[0].text = "";
-			textObjects[1].text = "";
-			textObjects[2].text = "";
-			textObjects[3].text = "";
-			textObjects[4].text = "";
-			textObjects[5].text = "";
-			textObjects[6].text = "";
-			textObjects[7].text = "";
+		}
 
-			if (currentButton > 0)
-			{
-				imageAnimal.sprite = animal[currentButton - 1];
-				StartCoroutine(AnimateTitleChurch());
-			}
-			else
-			{
-				imageAnimal.sprite = noAnimal;
-				StartCoroutine(AnimateTextScripture());
-			}
+		textObjects[0].text = "";
+		textObjects[1].text = "";
+		textObjects[2].text = "";
+		textObjects[3].text = "";
+		textObjects[4].text = "";
+		textObjects[5].text = "";
+		textObjects[6].text = "";
+		
+		if (!isFirstSelection)
+		{
+			isFirstSelection = true;
+		}
+
+		if (currentButton > 0)
+		{
+			imageAnimal.sprite = animal[currentButton - 1];
+			StartCoroutine(AnimateTitleChurch());
+		}
+		else
+		{
+			imageAnimal.sprite = noAnimal;
+			StartCoroutine(AnimateTextScripture());
 		}
 	}
 
