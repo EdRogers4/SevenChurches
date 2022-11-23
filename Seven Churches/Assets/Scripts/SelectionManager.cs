@@ -99,9 +99,9 @@ public class SelectionManager : MonoBehaviour
 
 	private IEnumerator AnimateTextObjective()
 	{
-		for (int i = 0; i < textObjective[currentButton - 1].Length; i++)
+		for (int i = 0; i < textObjective[currentButton].Length; i++)
 		{
-			textObjects[1].text += textObjective[currentButton - 1][i];
+			textObjects[1].text += textObjective[currentButton][i];
 			yield return new WaitForSeconds(speedTextSlow);
 		}
 
@@ -117,7 +117,7 @@ public class SelectionManager : MonoBehaviour
 			{
 				if (currentButton == 1)
 				{
-					var quoteIndex = currentButton - 1;
+					var quoteIndex = currentButton;
 					CheckForLineBreak(quoteIndex, i);
 				}
 
@@ -137,9 +137,9 @@ public class SelectionManager : MonoBehaviour
 
 			yield return new WaitForSeconds(speedTextTransition);
 
-			for (int i = 0; i < textQuote[currentButton - 1].Length; i++)
+			for (int i = 0; i < textQuote[currentButton].Length; i++)
 			{
-				textObjects[3].text += textQuote[currentButton - 1][i];
+				textObjects[3].text += textQuote[currentButton][i];
 				yield return new WaitForSeconds(speedTextFast);
 			}
 		}
@@ -152,9 +152,9 @@ public class SelectionManager : MonoBehaviour
 		if (currentSong != button)
 		{
 			currentSong = currentButton;
-			audioSourceMusic.clip = song[currentButton - 1];
+			audioSourceMusic.clip = song[currentButton];
 			audioSourceMusic.Play();
-			imageAnimal.sprite = animal[currentButton];
+			imageAnimal.sprite = animal[currentButton - 1];
 			textObjects[0].text = "";
 			textObjects[1].text = "";
 			textObjects[2].text = "";
