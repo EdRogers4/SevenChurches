@@ -137,9 +137,9 @@ public class SelectionManager : MonoBehaviour
 
 			yield return new WaitForSeconds(speedTextTransition);
 
-			for (int i = 0; i < textQuote[currentButton].Length; i++)
+			for (int i = 0; i < textQuote[currentButton - 1].Length; i++)
 			{
-				textObjects[3].text += textQuote[currentButton][i];
+				textObjects[3].text += textQuote[currentButton - 1][i];
 				yield return new WaitForSeconds(speedTextFast);
 			}
 		}
@@ -147,6 +147,7 @@ public class SelectionManager : MonoBehaviour
 
 	public void ButtonSelect(int button)
 	{
+		StopAllCoroutines();
 		currentButton = button;
 		
 		if (currentSong != button)

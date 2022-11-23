@@ -254,7 +254,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -80, y: 98}
+  m_AnchoredPosition: {x: -80, y: 48}
   m_SizeDelta: {x: 156.7187, y: 102.65619}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &195042024
@@ -558,7 +558,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -240, y: 98}
+  m_AnchoredPosition: {x: -240, y: 48}
   m_SizeDelta: {x: 156.7187, y: 102.65619}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &329027959
@@ -1184,9 +1184,9 @@ MonoBehaviour:
     is a man of great healing!  Give it all you got.  And don\u2019t let that stop
     you.  And be that.  And know that.  And mean that.\u201D  \u2013 From an agent
     of the church of Pergamos"
-  speedTextSlow: 0.1
-  speedTextFast: 0.02
-  speedTextTransition: 0.45
+  speedTextSlow: 0.025
+  speedTextFast: 0.005
+  speedTextTransition: 0.25
   imageAnimal: {fileID: 198982437}
 --- !u!1 &550250205
 GameObject:
@@ -1479,7 +1479,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -20}
-  m_SizeDelta: {x: 750, y: 894}
+  m_SizeDelta: {x: 734, y: 1043.1}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &697410661
 MonoBehaviour:
@@ -1503,7 +1503,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 94920cd1735345a438e6f509b8d5d191, type: 3}
   m_Type: 0
-  m_PreserveAspect: 1
+  m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -1715,7 +1715,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -240, y: 204.1719}
+  m_AnchoredPosition: {x: -240, y: 154}
   m_SizeDelta: {x: 156.7187, y: 102.65619}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &967817657
@@ -2081,7 +2081,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 80, y: 204.1719}
+  m_AnchoredPosition: {x: 80, y: 154}
   m_SizeDelta: {x: 156.7187, y: 102.65619}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1161026378
@@ -2478,7 +2478,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 240, y: 98}
+  m_AnchoredPosition: {x: 240, y: 48}
   m_SizeDelta: {x: 156.7187, y: 102.65619}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1259751312
@@ -3010,8 +3010,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -422}
-  m_SizeDelta: {x: 788, y: 30}
+  m_AnchoredPosition: {x: 0, y: -468}
+  m_SizeDelta: {x: 788, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1322229282
 GameObject:
@@ -3049,7 +3049,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -80, y: 204.1719}
+  m_AnchoredPosition: {x: -80, y: 154}
   m_SizeDelta: {x: 156.7187, y: 102.65619}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1322229284
@@ -4326,7 +4326,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 240, y: 204.1719}
+  m_AnchoredPosition: {x: 240, y: 154}
   m_SizeDelta: {x: 156.7187, y: 102.65619}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1783602881
@@ -4888,7 +4888,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 80, y: 98}
+  m_AnchoredPosition: {x: 80, y: 48}
   m_SizeDelta: {x: 156.7187, y: 102.65619}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &2051715879
