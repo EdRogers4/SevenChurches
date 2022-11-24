@@ -174,8 +174,11 @@ public class SelectionManager : MonoBehaviour
 		
 		for (int i = 0; i < titleObjective.Length; i++)
 		{
-			yield return new WaitForSeconds(speedTextSlow);
-			textObjects[1].text += titleObjective[i];
+			if (i != 0 && i != 1)
+			{
+				yield return new WaitForSeconds(speedTextSlow);
+				textObjects[1].text += titleObjective[i];
+			}
 		}
 
 		textObjects[1].text += "<b>";
