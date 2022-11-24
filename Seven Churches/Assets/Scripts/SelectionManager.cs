@@ -169,8 +169,24 @@ public class SelectionManager : MonoBehaviour
 		for (int i = 0; i < textName.Length; i++)
 		{
 			textObjects[4].text += textName[i];
-			yield return new WaitForSeconds(speedTextName);
+			yield return new WaitForSeconds(speedTextSlow);
 		}
+		
+		for (int i = 0; i < titleObjective.Length; i++)
+		{
+			yield return new WaitForSeconds(speedTextSlow);
+			textObjects[1].text += titleObjective[i];
+		}
+
+		textObjects[1].text += "<b>";
+		
+		for (int i = 0; i < textObjective[currentButton].Length; i++)
+		{
+			textObjects[1].text += textObjective[currentButton][i];
+			yield return new WaitForSeconds(speedTextSlow);
+		}
+
+		yield return new WaitForSeconds(speedTextTransition);
 
 		for (int i = 0; i < textScripture[0].Length; i++)
 		{
@@ -181,6 +197,12 @@ public class SelectionManager : MonoBehaviour
 		for (int i = 0; i < textScripture[1].Length; i++)
 		{
 			textObjects[6].text += textScripture[1][i];
+			yield return new WaitForSeconds(speedTextFast);
+		}
+		
+		for (int i = 0; i < textScripture[2].Length; i++)
+		{
+			textObjects[7].text += textScripture[2][i];
 			yield return new WaitForSeconds(speedTextFast);
 		}
 	}
@@ -229,6 +251,7 @@ public class SelectionManager : MonoBehaviour
 		textObjects[4].text = "";
 		textObjects[5].text = "";
 		textObjects[6].text = "";
+		textObjects[7].text = "";
 		
 		if (!isFirstSelection)
 		{
