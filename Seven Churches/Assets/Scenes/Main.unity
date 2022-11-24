@@ -299,8 +299,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -80, y: 48}
-  m_SizeDelta: {x: 156.7187, y: 102.65619}
+  m_AnchoredPosition: {x: -60, y: 48}
+  m_SizeDelta: {x: 116, y: 74}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &195042024
 MonoBehaviour:
@@ -380,7 +380,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 9bdbcd7f298449a41b0c8a77398ab2e1, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -603,8 +603,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -240, y: 48}
-  m_SizeDelta: {x: 156.7187, y: 102.65619}
+  m_AnchoredPosition: {x: -180, y: 48}
+  m_SizeDelta: {x: 116, y: 74}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &329027959
 MonoBehaviour:
@@ -684,7 +684,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 0d0279a198361094a955377fc491e803, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -736,7 +736,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 2000, y: 2000}
+  m_SizeDelta: {x: 1585, y: 1585}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &402713897
 MonoBehaviour:
@@ -751,7 +751,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5347039, g: 0.5566038, b: 0.47526133, a: 1}
+  m_Color: {r: 0.31721902, g: 0.3301887, b: 0.29127964, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1205,7 +1205,7 @@ MonoBehaviour:
   - PROPHECY
   textQuote:
   - "\u201CThey are the meaning of no nonsense.  There is a reason for everything
-    you do and say.   It is good to be true on the inside.  Ed Rogers is not that.\u201D  
+    you do and say.   It is good to be true on the inside.  Ed Rogers is not that.\u201D   
     \u2013 From Gabriel"
   - "\u201CThey are the best at whatever it takes.  So be it!  They will take a violent
     nonsense thing and make it something beautiful on the inside, and that is the
@@ -1708,7 +1708,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -20}
-  m_SizeDelta: {x: 734, y: 1043.1}
+  m_SizeDelta: {x: 716, y: 985}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &697410661
 MonoBehaviour:
@@ -1723,7 +1723,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9056604, g: 0.9056604, b: 0.9056604, a: 1}
+  m_Color: {r: 0.5660378, g: 0.5660378, b: 0.5660378, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1892,12 +1892,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 720, y: 1280}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -2087,8 +2087,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -240, y: 154}
-  m_SizeDelta: {x: 156.7187, y: 102.65619}
+  m_AnchoredPosition: {x: -180, y: 127.4}
+  m_SizeDelta: {x: 116, y: 74}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &967817657
 MonoBehaviour:
@@ -2168,7 +2168,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: f61b9269407d59d4484584d8eb20fa73, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -2354,11 +2354,11 @@ RectTransform:
   m_Father: {fileID: 697410660}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 55, y: 336}
-  m_SizeDelta: {x: 800, y: 50}
-  m_Pivot: {x: 0, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 336}
+  m_SizeDelta: {x: 780, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1112812409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2589,8 +2589,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 80, y: 154}
-  m_SizeDelta: {x: 156.7187, y: 102.65619}
+  m_AnchoredPosition: {x: 60, y: 127.4}
+  m_SizeDelta: {x: 116, y: 74}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1161026378
 MonoBehaviour:
@@ -2670,7 +2670,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 0274e11857e3f0d46bd5ad0e01a5f00c, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -2986,8 +2986,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 240, y: 48}
-  m_SizeDelta: {x: 156.7187, y: 102.65619}
+  m_AnchoredPosition: {x: 180, y: 48}
+  m_SizeDelta: {x: 116, y: 74}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1259751312
 MonoBehaviour:
@@ -3067,7 +3067,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: a640a82d02449934eb05eadd385d71b5, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -3557,8 +3557,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -80, y: 154}
-  m_SizeDelta: {x: 156.7187, y: 102.65619}
+  m_AnchoredPosition: {x: -60, y: 127.4}
+  m_SizeDelta: {x: 116, y: 74}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1322229284
 MonoBehaviour:
@@ -3638,7 +3638,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 7005c8464aac85c4aa47c6f4242b2963, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -5012,8 +5012,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 240, y: 154}
-  m_SizeDelta: {x: 156.7187, y: 102.65619}
+  m_AnchoredPosition: {x: 180, y: 127.4}
+  m_SizeDelta: {x: 116, y: 74}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1783602881
 MonoBehaviour:
@@ -5093,7 +5093,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: d2aa607bdc329d44283d53915411a154, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -5511,8 +5511,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 28, y: 408}
-  m_SizeDelta: {x: 766, y: 65}
+  m_AnchoredPosition: {x: 0, y: 408}
+  m_SizeDelta: {x: 780, y: 65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1914453255
 MonoBehaviour:
@@ -5891,8 +5891,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 80, y: 48}
-  m_SizeDelta: {x: 156.7187, y: 102.65619}
+  m_AnchoredPosition: {x: 60, y: 48}
+  m_SizeDelta: {x: 116, y: 74}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &2051715879
 MonoBehaviour:
@@ -5972,7 +5972,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 38200330e35250a4489620c1d19819ea, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -6025,7 +6025,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 398}
-  m_SizeDelta: {x: 766, y: 50}
+  m_SizeDelta: {x: 780, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2070593540
 MonoBehaviour:
