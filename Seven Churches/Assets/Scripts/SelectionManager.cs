@@ -8,6 +8,7 @@ public class SelectionManager : MonoBehaviour
 {
 	[SerializeField] private AudioSource audioSourceMusic;
 	[SerializeField] private AudioSource audioSourceSFX;
+	[SerializeField] private Animator animatorPrompt;
 	[SerializeField] private AudioClip[] song;
 	[SerializeField] private AudioClip click;
 	[SerializeField] private Sprite[] animal;
@@ -34,6 +35,21 @@ public class SelectionManager : MonoBehaviour
 	private int currentSong;
 	private string stringCheck;
 	private bool isFirstSelection;
+
+	private void Start()
+	{
+		StartCoroutine(ShowPrompt());
+	}
+
+	private IEnumerator ShowPrompt()
+	{
+		yield return new WaitForSeconds(12.0f);
+
+		if (!isFirstSelection)
+		{
+			animatorPrompt.SetBool("isShow", true);
+		}
+	}
 
 	private void CheckForLineBreak(int quoteIndex, int charIndex)
 	{
@@ -131,7 +147,6 @@ public class SelectionManager : MonoBehaviour
 		}
 		else if (currentButton == 4)
 		{
-			//textObjects
 			for (int i = 0; i < textQuote[7].Length; i++)
 			{
 				CheckForLineBreak(7, i);
@@ -158,7 +173,7 @@ public class SelectionManager : MonoBehaviour
 
 			for (int i = 0; i < textQuote[8].Length; i++)
 			{
-				textObjects[3].text += textQuote[8][i];
+				textObjects[8].text += textQuote[8][i];
 				yield return new WaitForSeconds(speedTextFast);
 			}
 		}
@@ -247,18 +262,15 @@ public class SelectionManager : MonoBehaviour
 			audioSourceMusic.Play();
 		}
 
-		textObjects[0].text = "";
-		textObjects[1].text = "";
-		textObjects[2].text = "";
-		textObjects[3].text = "";
-		textObjects[4].text = "";
-		textObjects[5].text = "";
-		textObjects[6].text = "";
-		textObjects[7].text = "";
-		
+		for (int i = 0; i < textObjects.Length; i++)
+		{
+			textObjects[i].text = "";
+		}
+
 		if (!isFirstSelection)
 		{
 			isFirstSelection = true;
+			animatorPrompt.SetBool("isShow", false);
 		}
 
 		if (currentButton > 0)
