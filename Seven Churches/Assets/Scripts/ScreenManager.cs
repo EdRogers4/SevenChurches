@@ -18,15 +18,14 @@ public class ScreenManager : MonoBehaviour
     [SerializeField] private Image imageDisciplineColors;
     [SerializeField] private TextMeshProUGUI textContinue;
     [SerializeField] private TextMeshProUGUI textQuestion;
+    [SerializeField] private GameObject questionObject;
     [SerializeField] private Sprite[] spriteDisciplineColors;
-    private int progressState;
     private int currentScreen;
-    private int currentCause;
-    private int currentDiscipline;
     private Color colorDefaultSymbol;
     private Color colorDefaultStart = new Color(1f, 1f, 1f, 0.05f);
 
     [Header("Aura")]
+    private int progressState;
     [SerializeField] private int[] dataCore;
     [SerializeField] private int[] dataShell;
     [SerializeField] private int[] dataAdjunct;
@@ -48,13 +47,26 @@ public class ScreenManager : MonoBehaviour
     public void NextScreen()
     {
         screens[currentScreen].SetActive(false);
-        currentScreen += 1;
-        screens[currentScreen].SetActive(true);
 
-        if (!buttonBack.activeSelf)
+        if (currentScreen == 3)
         {
-            buttonBack.SetActive(true);
+            buttonBack.SetActive(false);
+            currentScreen = 0;
+            screens[currentScreen].SetActive(true);
+            progressState += 1;
         }
+        else
+        {
+            currentScreen += 1;
+            screens[currentScreen].SetActive(true);
+
+            if (!buttonBack.activeSelf)
+            {
+                buttonBack.SetActive(true);
+            }
+        }
+
+        QuestionText();
     }
 
     public void PreviousScreen()
@@ -70,6 +82,8 @@ public class ScreenManager : MonoBehaviour
         {
             buttonBack.SetActive(false);
         }
+
+        QuestionText();
     }
 
     public void AssignContinueButtonText()
@@ -89,7 +103,56 @@ public class ScreenManager : MonoBehaviour
                 textContinue.text = "continue";
                 break;
         }
-    }    
+    }
+    
+    private void QuestionText()
+    {
+        if (currentScreen == 0 || currentScreen == 2)
+        {
+            questionObject.SetActive(true);
+            
+            switch (progressState)
+            {
+                case 0:
+                    switch (currentScreen)
+                    {
+                        case 0:
+                            textQuestion.text = "What is your primary cause?";
+                            break;
+                        case 2:
+                            textQuestion.text = "What is your primary gift?";
+                            break;
+                    }
+                    break;
+                case 1:
+                    switch (currentScreen)
+                    {
+                        case 0:
+                            textQuestion.text = "What is your secondary cause?";
+                            break;
+                        case 2:
+                            textQuestion.text = "What is your secondary gift?";
+                            break;
+                    }
+                    break;
+                case 2:
+                    switch (currentScreen)
+                    {
+                        case 0:
+                            textQuestion.text = "What is your partner's cause?";
+                            break;
+                        case 2:
+                            textQuestion.text = "What is your partner's gift?";
+                            break;
+                    }
+                    break;
+            }
+        }
+        else
+        {
+            questionObject.SetActive(false);
+        }
+    }
 
     public void ToggleButtonContinue(bool value)
     {
@@ -103,8 +166,8 @@ public class ScreenManager : MonoBehaviour
 
     public void SelectCause(int index)
     {
-        currentCause = index;
-        imageDisciplineColors.sprite = spriteDisciplineColors[currentCause];
+        UpdateData(0, index);
+        imageDisciplineColors.sprite = spriteDisciplineColors[index];
 
         if (!imageSelect.activeSelf)
         {
@@ -132,8 +195,7 @@ public class ScreenManager : MonoBehaviour
 
     public void SelectDiscipline(int index)
     {
-        currentDiscipline = index;
-
+        UpdateData(1, index);
         if (!imageSelect2.activeSelf)
         {
             imageSelect2.SetActive(true);
@@ -150,6 +212,25 @@ public class ScreenManager : MonoBehaviour
                 imageSymbolDiscipline[i].color = colorDefaultSymbol;
                 imageButtonDiscipline[i].color = Color.clear;
             }
+        }
+    }
+
+    private void UpdateData(int data, int index)
+    {
+        switch (progressState)
+        {
+            case 0:
+                dataCore[data] = index + 1;
+                imageCore.sprite = spriteAura[((dataCore[0] - 1) * 6) + dataCore[1]];
+                break;
+            case 1:
+                dataShell[data] = index + 1;
+                imageShell.sprite = spriteAura[((dataShell[0] - 1) * 6) + dataShell[1]];
+                break;
+            case 2:
+                dataAdjunct[data] = index + 1;
+                imageAdjunct.sprite = spriteAdjunct[((dataAdjunct[0] - 1) * 6) + dataAdjunct[1]];
+                break;
         }
     }
 }
