@@ -17,6 +17,7 @@ public class ScreenManager : MonoBehaviour
     [SerializeField] private Image[] imageButtonDiscipline;
     [SerializeField] private Image imageDisciplineColors;
     [SerializeField] private TextMeshProUGUI textContinue;
+    [SerializeField] private TextMeshProUGUI textQuestion;
     [SerializeField] private Sprite[] spriteDisciplineColors;
     private int progressState;
     private int currentScreen;
@@ -24,6 +25,19 @@ public class ScreenManager : MonoBehaviour
     private int currentDiscipline;
     private Color colorDefaultSymbol;
     private Color colorDefaultStart = new Color(1f, 1f, 1f, 0.05f);
+
+    [Header("Aura")]
+    [SerializeField] private int[] dataCore;
+    [SerializeField] private int[] dataShell;
+    [SerializeField] private int[] dataAdjunct;
+    [SerializeField] private TextMeshProUGUI textCore;
+    [SerializeField] private TextMeshProUGUI textShell;
+    [SerializeField] private TextMeshProUGUI textAdjunct;
+    [SerializeField] private Image imageCore;
+    [SerializeField] private Image imageShell;
+    [SerializeField] private Image imageAdjunct;
+    [SerializeField] private Sprite[] spriteAura;
+    [SerializeField] private Sprite[] spriteAdjunct;
 
     private void Start()
     {
@@ -41,20 +55,21 @@ public class ScreenManager : MonoBehaviour
         {
             buttonBack.SetActive(true);
         }
-
-        switch (progressState)
-        {
-            case 0:
-                progressState += 1;
-                break;
-        }
     }
 
     public void PreviousScreen()
     {
-        screens[currentScreen].SetActive(false);
-        currentScreen -= 1;
-        screens[currentScreen].SetActive(true);
+        if (currentScreen > 0)
+        {
+            screens[currentScreen].SetActive(false);
+            currentScreen -= 1;
+            screens[currentScreen].SetActive(true);
+        }
+
+        if (currentScreen <= 0)
+        {
+            buttonBack.SetActive(false);
+        }
     }
 
     public void AssignContinueButtonText()
