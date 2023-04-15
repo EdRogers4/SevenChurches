@@ -28,15 +28,22 @@ public class ScreenManager : MonoBehaviour
     private int progressState;
     [SerializeField] private int[] dataCore;
     [SerializeField] private int[] dataShell;
-    [SerializeField] private int[] dataAdjunct;
+    [SerializeField] private int[] dataTree;
+    [SerializeField] private Image auraScreen;
+    [SerializeField] private Sprite[] auraSprite;
     [SerializeField] private TextMeshProUGUI textCore;
     [SerializeField] private TextMeshProUGUI textShell;
-    [SerializeField] private TextMeshProUGUI textAdjunct;
+    [SerializeField] private TextMeshProUGUI textTree;
     [SerializeField] private Image imageCore;
     [SerializeField] private Image imageShell;
-    [SerializeField] private Image imageAdjunct;
-    [SerializeField] private Sprite[] spriteAura;
-    [SerializeField] private Sprite[] spriteAdjunct;
+    [SerializeField] private Image imageTree;
+    [SerializeField] private GameObject shell;
+    [SerializeField] private GameObject tree;
+    [SerializeField] private Sprite[] spriteCore;
+    [SerializeField] private Sprite[] spriteShell;
+    [SerializeField] private Sprite[] spriteTree;
+    [SerializeField] private string[] stringCause;
+    [SerializeField] private string[] stringDiscipline;
 
     private void Start()
     {
@@ -54,6 +61,12 @@ public class ScreenManager : MonoBehaviour
             currentScreen = 0;
             screens[currentScreen].SetActive(true);
             progressState += 1;
+
+            if (progressState <= 2)
+            {
+                auraScreen.sprite = auraSprite[progressState];
+            }
+            
         }
         else
         {
@@ -221,15 +234,28 @@ public class ScreenManager : MonoBehaviour
         {
             case 0:
                 dataCore[data] = index + 1;
-                imageCore.sprite = spriteAura[((dataCore[0] - 1) * 6) + dataCore[1]];
+                imageCore.sprite = spriteCore[((dataCore[0] - 1) * 6) + dataCore[1]];
+                textCore.text = stringCause[dataCore[0]] + " | " + stringDiscipline[dataCore[1]];
                 break;
             case 1:
                 dataShell[data] = index + 1;
-                imageShell.sprite = spriteAura[((dataShell[0] - 1) * 6) + dataShell[1]];
+                imageShell.sprite = spriteShell[((dataShell[0] - 1) * 6) + dataShell[1]];
+                textShell.text = stringCause[dataShell[0]] + " | " + stringDiscipline[dataShell[1]];
+
+                if (!shell.activeSelf)
+                {
+                    shell.SetActive(true);
+                }
                 break;
             case 2:
-                dataAdjunct[data] = index + 1;
-                imageAdjunct.sprite = spriteAdjunct[((dataAdjunct[0] - 1) * 6) + dataAdjunct[1]];
+                dataTree[data] = index + 1;
+                imageTree.sprite = spriteTree[((dataTree[0] - 1) * 6) + dataTree[1]];
+                textTree.text = stringCause[dataTree[0]] + " | " + stringDiscipline[dataTree[1]];
+
+                if (!tree.activeSelf)
+                {
+                    tree.SetActive(true);
+                }
                 break;
         }
     }
