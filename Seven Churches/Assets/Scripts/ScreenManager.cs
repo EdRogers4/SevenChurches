@@ -20,12 +20,15 @@ public class ScreenManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textQuestion;
     [SerializeField] private GameObject questionObject;
     [SerializeField] private Sprite[] spriteDisciplineColors;
-    private int currentScreen;
+    [SerializeField] private Sprite[] spriteCauseDescription;
+    [SerializeField] private int currentScreen;
+    [SerializeField] private int currentCause;
+    [SerializeField] private int currentDiscipline;
     private Color colorDefaultSymbol;
     private Color colorDefaultStart = new Color(1f, 1f, 1f, 0.05f);
 
     [Header("Aura")]
-    private int progressState;
+    [SerializeField] private int progressState;
     [SerializeField] private int[] dataCore;
     [SerializeField] private int[] dataShell;
     [SerializeField] private int[] dataTree;
@@ -37,13 +40,21 @@ public class ScreenManager : MonoBehaviour
     [SerializeField] private Image imageCore;
     [SerializeField] private Image imageShell;
     [SerializeField] private Image imageTree;
+    [SerializeField] private Image imageCauseDescription;
     [SerializeField] private GameObject shell;
+    [SerializeField] private GameObject core;
     [SerializeField] private GameObject tree;
     [SerializeField] private Sprite[] spriteCore;
     [SerializeField] private Sprite[] spriteShell;
     [SerializeField] private Sprite[] spriteTree;
     [SerializeField] private string[] stringCause;
     [SerializeField] private string[] stringDiscipline;
+
+    [Header("Screen Prompt")]
+    [SerializeField] private GameObject screenPrompt;
+    [SerializeField] private Animator animatorScreenPrompt;
+    [SerializeField] private TextMeshProUGUI textScreenPrompt;
+    [SerializeField] private bool isScreenPrompt;
 
     private void Start()
     {
@@ -53,34 +64,65 @@ public class ScreenManager : MonoBehaviour
 
     public void NextScreen()
     {
-        screens[currentScreen].SetActive(false);
-
-        if (currentScreen == 3)
+        if (isScreenPrompt)
         {
-            buttonBack.SetActive(false);
-            currentScreen = 0;
-            screens[currentScreen].SetActive(true);
-            progressState += 1;
-
-            if (progressState <= 2)
-            {
-                auraScreen.sprite = auraSprite[progressState];
-            }
-            
+            animatorScreenPrompt.speed = 1;
+            isScreenPrompt = false;
+            ToggleButtonContinue(false);
+            NextScreenSet();
         }
-        else
+        else if (!isScreenPrompt)
         {
-            currentScreen += 1;
-            screens[currentScreen].SetActive(true);
-
-            if (!buttonBack.activeSelf)
+            if (currentScreen == 3)
             {
-                buttonBack.SetActive(true);
+                ToggleButtonContinue(false);
+                screenPrompt.SetActive(true);
+                animatorScreenPrompt.SetBool("isShow", true);
+                isScreenPrompt = true;
+
+                switch (progressState)
+                {
+                    case 1:
+                        textScreenPrompt.text = "Choose your mode of expression";
+                        break;
+                    case 2:
+                        textScreenPrompt.text = "";
+                        break;
+                }
             }
+            else
+            {
+                screens[currentScreen].SetActive(false);
+                currentScreen += 1;
+                screens[currentScreen].SetActive(true);
+
+                if (!buttonBack.activeSelf)
+                {
+                    buttonBack.SetActive(true);
+                }
+
+                QuestionText();
+                SetButtonsOnScreen();
+            }
+        }
+    }
+
+    public void NextScreenSet()
+    {
+        screens[currentScreen].SetActive(false);
+        buttonBack.SetActive(false);
+        currentScreen = 0;
+        screens[currentScreen].SetActive(true);
+        progressState += 1;
+
+        if (progressState <= 2)
+        {
+            auraScreen.sprite = auraSprite[progressState];
         }
 
         QuestionText();
-    }
+        SetButtonsOnScreen();
+    }    
 
     public void PreviousScreen()
     {
@@ -97,7 +139,38 @@ public class ScreenManager : MonoBehaviour
         }
 
         QuestionText();
+        SetButtonsOnScreen();
     }
+
+    public void ToggleScreenPromptOff()
+    {
+        screenPrompt.SetActive(false);
+    }
+
+    private void SetButtonsOnScreen()
+    {
+        if (currentScreen == 0 || currentScreen == 2)
+        {
+            buttonContinue.SetActive(false);
+
+            if (currentScreen == 0)
+            {
+                imageSelect.SetActive(false);
+                imageSymbolCause[currentCause].color = colorDefaultSymbol;
+                imageButtonCause[currentCause].color = colorDefaultStart;
+            }
+            else if (currentScreen == 2)
+            {
+                imageSelect2.SetActive(false);
+                imageSymbolDiscipline[currentDiscipline].color = colorDefaultSymbol;
+                imageButtonDiscipline[currentDiscipline].color = colorDefaultStart;
+            }
+        }
+        else
+        {
+            buttonContinue.SetActive(true);
+        }
+    }    
 
     public void AssignContinueButtonText()
     {
@@ -130,10 +203,10 @@ public class ScreenManager : MonoBehaviour
                     switch (currentScreen)
                     {
                         case 0:
-                            textQuestion.text = "What is your primary cause?";
+                            textQuestion.text = "What is your cause?";
                             break;
                         case 2:
-                            textQuestion.text = "What is your primary gift?";
+                            textQuestion.text = "What negative emotion do you embrace most?";
                             break;
                     }
                     break;
@@ -141,10 +214,10 @@ public class ScreenManager : MonoBehaviour
                     switch (currentScreen)
                     {
                         case 0:
-                            textQuestion.text = "What is your secondary cause?";
+                            textQuestion.text = "What is your mode of expression?";
                             break;
                         case 2:
-                            textQuestion.text = "What is your secondary gift?";
+                            textQuestion.text = "What negative emotion do you express most?";
                             break;
                     }
                     break;
@@ -152,10 +225,10 @@ public class ScreenManager : MonoBehaviour
                     switch (currentScreen)
                     {
                         case 0:
-                            textQuestion.text = "What is your partner's cause?";
+                            textQuestion.text = "What is your sidekick's cause?";
                             break;
                         case 2:
-                            textQuestion.text = "What is your partner's gift?";
+                            textQuestion.text = "What negative emotion does your sidekick embrace most?";
                             break;
                     }
                     break;
@@ -179,8 +252,9 @@ public class ScreenManager : MonoBehaviour
 
     public void SelectCause(int index)
     {
-        UpdateData(0, index);
-        imageDisciplineColors.sprite = spriteDisciplineColors[index];
+        currentCause = index;
+        UpdateData(0, currentCause);
+        imageDisciplineColors.sprite = spriteDisciplineColors[currentCause];
 
         if (!imageSelect.activeSelf)
         {
@@ -193,37 +267,45 @@ public class ScreenManager : MonoBehaviour
         }
 
         imageSelect.transform.position = imageButtonCause[index].transform.position;
-        imageSymbolCause[index].color = Color.white;
-        imageButtonCause[index].color = new Color(1f, 1f, 1f, 0.24f);
+        imageSymbolCause[currentCause].color = Color.white;
+        imageButtonCause[currentCause].color = new Color(1f, 1f, 1f, 0.24f);
 
         for (int i = 0; i < imageSymbolCause.Length; i++)
         {
-            if (i != index)
+            if (i != currentCause)
             {
                 imageSymbolCause[i].color = colorDefaultSymbol;
-                imageButtonCause[i].color = Color.clear;
+                imageButtonCause[i].color = colorDefaultStart;
             }
         }
+
+        imageCauseDescription.sprite = spriteCauseDescription[currentCause];
     }
 
     public void SelectDiscipline(int index)
     {
-        UpdateData(1, index);
+        currentDiscipline = index;
+        UpdateData(1, currentDiscipline);
         if (!imageSelect2.activeSelf)
         {
             imageSelect2.SetActive(true);
         }
 
-        imageSelect2.transform.position = imageButtonDiscipline[index].transform.position;
-        imageSymbolDiscipline[index].color = Color.white;
-        imageButtonDiscipline[index].color = new Color(1f, 1f, 1f, 0.24f);
+        if (!buttonContinue.activeSelf)
+        {
+            buttonContinue.SetActive(true);
+        }
+
+        imageSelect2.transform.position = imageButtonDiscipline[currentDiscipline].transform.position;
+        imageSymbolDiscipline[currentDiscipline].color = Color.white;
+        imageButtonDiscipline[currentDiscipline].color = new Color(1f, 1f, 1f, 0.24f);
 
         for (int i = 0; i < imageSymbolDiscipline.Length; i++)
         {
-            if (i != index)
+            if (i != currentDiscipline)
             {
                 imageSymbolDiscipline[i].color = colorDefaultSymbol;
-                imageButtonDiscipline[i].color = Color.clear;
+                imageButtonDiscipline[i].color = colorDefaultStart;
             }
         }
     }
@@ -233,18 +315,18 @@ public class ScreenManager : MonoBehaviour
         switch (progressState)
         {
             case 0:
-                dataCore[data] = index + 1;
-                imageCore.sprite = spriteCore[((dataCore[0] - 1) * 6) + dataCore[1]];
-                textCore.text = stringCause[dataCore[0]] + " | " + stringDiscipline[dataCore[1]];
-                break;
-            case 1:
                 dataShell[data] = index + 1;
                 imageShell.sprite = spriteShell[((dataShell[0] - 1) * 6) + dataShell[1]];
                 textShell.text = stringCause[dataShell[0]] + " | " + stringDiscipline[dataShell[1]];
+                break;
+            case 1:
+                dataCore[data] = index + 1;
+                imageCore.sprite = spriteCore[((dataCore[0] - 1) * 6) + dataCore[1]];
+                textCore.text = stringCause[dataCore[0]] + " | " + stringDiscipline[dataCore[1]];
 
-                if (!shell.activeSelf)
+                if (!core.activeSelf)
                 {
-                    shell.SetActive(true);
+                    core.SetActive(true);
                 }
                 break;
             case 2:

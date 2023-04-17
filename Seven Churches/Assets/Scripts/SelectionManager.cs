@@ -45,10 +45,12 @@ public class SelectionManager : MonoBehaviour
 	{
 		yield return new WaitForSeconds(12.0f);
 
+		/*
 		if (!isFirstSelection)
 		{
 			animatorPrompt.SetBool("isShow", true);
 		}
+		*/
 	}
 
 	private void CheckForLineBreak(int quoteIndex, int charIndex)
