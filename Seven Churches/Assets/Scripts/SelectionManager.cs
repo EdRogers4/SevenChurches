@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class SelectionManager : MonoBehaviour
 {
+	[SerializeField] private ScreenManager scriptScreenManager;
 	[SerializeField] private AudioSource audioSourceMusic;
 	[SerializeField] private AudioSource audioSourceSFX;
 	[SerializeField] private Animator animatorPrompt;
@@ -287,7 +288,12 @@ public class SelectionManager : MonoBehaviour
 		}
 	}
 
-	public void CloseApplication()
+    public void UpdateHomeText(int index)
+    {
+		scriptScreenManager.SetHomeText(textChurch[index], textLeader[index], textObjective[index], animal[index]);
+    }
+
+    public void CloseApplication()
 	{
 		Application.Quit();
 	}

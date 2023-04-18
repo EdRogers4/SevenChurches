@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class ScreenManager : MonoBehaviour
 {
+    [Header("General")]
+    [SerializeField] private SelectionManager scriptSelectionManager;
     [SerializeField] private GameObject[] screens;
     [SerializeField] private GameObject buttonContinue;
     [SerializeField] private GameObject buttonBack;
+
+    [Header("Causes & Disciplines")]
     [SerializeField] private GameObject imageSelect;
     [SerializeField] private GameObject imageSelect2;
     [SerializeField] private Image[] imageSymbolCause;
@@ -49,6 +54,7 @@ public class ScreenManager : MonoBehaviour
     [SerializeField] private Sprite[] spriteTree;
     [SerializeField] private string[] stringCause;
     [SerializeField] private string[] stringDiscipline;
+    private bool isTree;
 
     [Header("Screen Prompt")]
     [SerializeField] private GameObject screenPrompt;
@@ -64,16 +70,37 @@ public class ScreenManager : MonoBehaviour
     [Header("Church")]
     [SerializeField] private Button[] buttonChurch;
     [SerializeField] private GameObject churchButtons;
+    private bool isChurch;
 
     [Header("Missions")]
     [SerializeField] private Button[] buttonMission;
     [SerializeField] private Sprite[] spriteMissionButtons;
+    [SerializeField] private string[] stringMission;
+    [SerializeField] private TextMeshProUGUI[] missionText;
     private int currentMission;
+
+    [Header("Home")]
+    [SerializeField] private TextMeshProUGUI textHomeChurch;
+    [SerializeField] private TextMeshProUGUI textHomeLeader;
+    [SerializeField] private TextMeshProUGUI textHomeObjective;
+    [SerializeField] private TextMeshProUGUI textHomeMission;
+    [SerializeField] private TextMeshProUGUI textHomeShell;
+    [SerializeField] private TextMeshProUGUI textHomeCore;
+    [SerializeField] private TextMeshProUGUI textHomeTree;
+    [SerializeField] private Image imageHomeAnimal;
+    [SerializeField] private Image imageHomeShell;
+    [SerializeField] private Image imageHomeCore;
+    [SerializeField] private Image imageHomeTree;
 
     private void Start()
     {
         colorDefaultSymbol = imageSymbolCause[0].color;
         screens[0].SetActive(true);
+
+        for (int i = 0; i < missionText.Length; i++)
+        {
+            missionText[i].text = stringMission[i];
+        }
     }
 
     public void NextScreen()
@@ -109,6 +136,11 @@ public class ScreenManager : MonoBehaviour
                 if (!buttonBack.activeSelf)
                 {
                     buttonBack.SetActive(true);
+                }
+
+                if (currentScreen == 6)
+                {
+                    scriptSelectionManager.UpdateHomeText(dataShell[0] - 1);
                 }
 
                 QuestionText();
@@ -148,9 +180,11 @@ public class ScreenManager : MonoBehaviour
         {
             case 1:
                 ShowScreenPrompt();
+                isTree = true;
                 break;
             case 2:
                 ToggleButtonPrompt(false);
+                isChurch = true;
                 progressState += 1;
                 screens[currentScreen].SetActive(false);
                 currentScreen = 4;
@@ -161,26 +195,43 @@ public class ScreenManager : MonoBehaviour
                 animatorQuestion.enabled = false;
                 textQuestion.color = Color.white;
                 break;
+            case 3:
+                Scene scene = SceneManager.GetActiveScene();
+                SceneManager.LoadScene(scene.name);
+                break;
         }
     }
 
     public void ButtonNo()
     {
-        progressState += 1;
-        UpdateButtonPrompt();
 
         Debug.Log("Progress State: " + progressState);
 
         switch (progressState)
         {
-            case 3:
+            case 1:
+                progressState += 1;
+                UpdateButtonPrompt();
+                break;
+            case 2:
+                progressState += 1;
                 ToggleButtonPrompt(false);
                 ToggleButtonContinue(false);
                 screens[currentScreen].SetActive(false);
                 currentScreen = 6;
                 screens[currentScreen].SetActive(true);
+                scriptSelectionManager.UpdateHomeText(dataShell[0] - 1);
+                break;
+            case 3:
+                ToggleButtonPrompt(false);
                 break;
         }
+    }
+
+    public void ButtonReset()
+    {
+        UpdateButtonPrompt();
+        ToggleButtonPrompt(true);
     }
 
     private void UpdateButtonPrompt()
@@ -194,6 +245,10 @@ public class ScreenManager : MonoBehaviour
             case 2:
                 textButtonPrompt.text = "Do you want to be assigned to an angel of a church?";
                 imageButtonNo.sprite = spriteButtonNo[1];
+                break;
+            case 3:
+                textButtonPrompt.text = "Are you sure you want to start from the beginning?";
+                imageButtonNo.sprite = spriteButtonNo[0];
                 break;
         }
     }
@@ -444,6 +499,29 @@ public class ScreenManager : MonoBehaviour
                     tree.SetActive(true);
                 }
                 break;
+        }
+    }
+
+    public void SetHomeText(string church, string leader, string objective, Sprite animal)
+    {
+        if (isChurch)
+        {
+            textHomeChurch.text = church;
+            textHomeLeader.text = leader;
+            textHomeObjective.text = objective;
+            imageHomeAnimal.sprite = animal;
+            textHomeMission.text = stringMission[currentMission - 1];
+        }
+
+        textHomeShell.text = textShell.text = stringCause[dataShell[0]] + " | " + stringDiscipline[dataShell[1]];
+        textHomeCore.text = textCore.text = stringCause[dataCore[0]] + " | " + stringDiscipline[dataCore[1]];
+        imageHomeShell.sprite = spriteShell[((dataShell[0] - 1) * 6) + dataShell[1]];
+        imageHomeCore.sprite = spriteCore[((dataCore[0] - 1) * 6) + dataCore[1]];
+
+        if (isTree)
+        {
+            textHomeTree.text = textTree.text = stringCause[dataTree[0]] + " | " + stringDiscipline[dataTree[1]];
+            imageHomeTree.sprite = spriteTree[((dataTree[0] - 1) * 6) + dataTree[1]];
         }
     }
 }
