@@ -272,7 +272,7 @@ public class SelectionManager : MonoBehaviour
 		if (!isFirstSelection)
 		{
 			isFirstSelection = true;
-			animatorPrompt.SetBool("isShow", false);
+			//animatorPrompt.SetBool("isShow", false);
 		}
 
 		if (currentButton > 0)

@@ -28,7 +28,7 @@ public class ScreenManager : MonoBehaviour
     private Color colorDefaultStart = new Color(1f, 1f, 1f, 0.05f);
 
     [Header("Aura")]
-    [SerializeField] private int progressState;
+    public int progressState;
     [SerializeField] private int[] dataCore;
     [SerializeField] private int[] dataShell;
     [SerializeField] private int[] dataTree;
@@ -53,8 +53,22 @@ public class ScreenManager : MonoBehaviour
     [Header("Screen Prompt")]
     [SerializeField] private GameObject screenPrompt;
     [SerializeField] private Animator animatorScreenPrompt;
+    [SerializeField] private Animator animatorQuestion;
     [SerializeField] private TextMeshProUGUI textScreenPrompt;
     [SerializeField] private bool isScreenPrompt;
+    [SerializeField] private GameObject buttonPromptBackground;
+    [SerializeField] private TextMeshProUGUI textButtonPrompt;
+    [SerializeField] private Image imageButtonNo;
+    [SerializeField] private Sprite[] spriteButtonNo;
+
+    [Header("Church")]
+    [SerializeField] private Button[] buttonChurch;
+    [SerializeField] private GameObject churchButtons;
+
+    [Header("Missions")]
+    [SerializeField] private Button[] buttonMission;
+    [SerializeField] private Sprite[] spriteMissionButtons;
+    private int currentMission;
 
     private void Start()
     {
@@ -73,21 +87,17 @@ public class ScreenManager : MonoBehaviour
         }
         else if (!isScreenPrompt)
         {
-            if (currentScreen == 3)
+            if (currentScreen == 3 && progressState < 1)
             {
-                ToggleButtonContinue(false);
-                screenPrompt.SetActive(true);
-                animatorScreenPrompt.SetBool("isShow", true);
-                isScreenPrompt = true;
+                ShowScreenPrompt();
+            }
+            else if (currentScreen == 3 && progressState >= 1)
+            {
+                ToggleButtonPrompt(true);
 
-                switch (progressState)
+                if (progressState == 2)
                 {
-                    case 1:
-                        textScreenPrompt.text = "Choose your mode of expression";
-                        break;
-                    case 2:
-                        textScreenPrompt.text = "";
-                        break;
+                    UpdateButtonPrompt();
                 }
             }
             else
@@ -107,17 +117,103 @@ public class ScreenManager : MonoBehaviour
         }
     }
 
+    private void ShowScreenPrompt()
+    {
+        buttonBack.SetActive(false);
+        ToggleButtonContinue(false);
+        screenPrompt.SetActive(true);
+        animatorScreenPrompt.SetBool("isShow", true);
+        isScreenPrompt = true;
+        progressState += 1;
+
+        switch (progressState)
+        {
+            case 1:
+                textScreenPrompt.text = "Choose your mode of expression";
+                break;
+            case 2:
+                textScreenPrompt.text = "Choose your sidekick's cause";
+                break;
+        }
+    }
+
+    public void ToggleButtonPrompt(bool value)
+    {
+        buttonPromptBackground.SetActive(value);
+    }
+    
+    public void ButtonYes()
+    {
+        switch (progressState)
+        {
+            case 1:
+                ShowScreenPrompt();
+                break;
+            case 2:
+                ToggleButtonPrompt(false);
+                progressState += 1;
+                screens[currentScreen].SetActive(false);
+                currentScreen = 4;
+                screens[currentScreen].SetActive(true);
+                buttonChurch[dataShell[0] - 1].onClick.Invoke();
+                churchButtons.SetActive(false);
+                QuestionText();
+                animatorQuestion.enabled = false;
+                textQuestion.color = Color.white;
+                break;
+        }
+    }
+
+    public void ButtonNo()
+    {
+        progressState += 1;
+        UpdateButtonPrompt();
+
+        Debug.Log("Progress State: " + progressState);
+
+        switch (progressState)
+        {
+            case 3:
+                ToggleButtonPrompt(false);
+                ToggleButtonContinue(false);
+                screens[currentScreen].SetActive(false);
+                currentScreen = 6;
+                screens[currentScreen].SetActive(true);
+                break;
+        }
+    }
+
+    private void UpdateButtonPrompt()
+    {
+        switch (progressState)
+        {
+            case 1:
+                textButtonPrompt.text = "Do you have a sidekick?";
+                imageButtonNo.sprite = spriteButtonNo[0];
+                break;
+            case 2:
+                textButtonPrompt.text = "Do you want to be assigned to an angel of a church?";
+                imageButtonNo.sprite = spriteButtonNo[1];
+                break;
+        }
+    }
+
+
     public void NextScreenSet()
     {
         screens[currentScreen].SetActive(false);
         buttonBack.SetActive(false);
         currentScreen = 0;
         screens[currentScreen].SetActive(true);
-        progressState += 1;
 
         if (progressState <= 2)
         {
             auraScreen.sprite = auraSprite[progressState];
+        }
+
+        if (buttonPromptBackground.activeSelf)
+        {
+            ToggleButtonPrompt(false);
         }
 
         QuestionText();
@@ -133,13 +229,31 @@ public class ScreenManager : MonoBehaviour
             screens[currentScreen].SetActive(true);
         }
 
-        if (currentScreen <= 0)
+        if (currentScreen <= 0 || currentScreen == 4)
         {
             buttonBack.SetActive(false);
         }
 
         QuestionText();
         SetButtonsOnScreen();
+    }
+
+    public void ButtonMission(int index)
+    {
+        currentMission = index + 1;
+        ToggleButtonContinue(true);
+
+        for (int i = 0; i < buttonMission.Length; i++)
+        {
+            if (i == index)
+            {
+                buttonMission[i].image.sprite = spriteMissionButtons[1];
+            }
+            else
+            {
+                buttonMission[i].image.sprite = spriteMissionButtons[0];
+            }
+        }
     }
 
     public void ToggleScreenPromptOff()
@@ -166,34 +280,19 @@ public class ScreenManager : MonoBehaviour
                 imageButtonDiscipline[currentDiscipline].color = colorDefaultStart;
             }
         }
+        else if (currentScreen == 6 || (currentScreen == 5 && currentMission == 0))
+        {
+            buttonContinue.SetActive(false);
+        }
         else
         {
             buttonContinue.SetActive(true);
-        }
-    }    
-
-    public void AssignContinueButtonText()
-    {
-        switch (currentScreen)
-        {
-            case 0:
-                textContinue.text = "continue";
-                break;
-            case 1:
-                textContinue.text = "choose this cause";
-                break;
-            case 2:
-                textContinue.text = "choose this discipline";
-                break;
-            case 4:
-                textContinue.text = "continue";
-                break;
         }
     }
     
     private void QuestionText()
     {
-        if (currentScreen == 0 || currentScreen == 2)
+        if (currentScreen == 0 || currentScreen == 2 || currentScreen == 4 || currentScreen == 5)
         {
             questionObject.SetActive(true);
             
@@ -232,6 +331,17 @@ public class ScreenManager : MonoBehaviour
                             break;
                     }
                     break;
+                case 3:
+                    switch (currentScreen)
+                    {
+                        case 4:
+                            textQuestion.text = "Your spirit is assigned to the angel of this church.";
+                            break;
+                        case 5:
+                            textQuestion.text = "Choose one to overcome and they will speak to you.";
+                            break;
+                    }
+                    break;
             }
         }
         else
@@ -243,11 +353,6 @@ public class ScreenManager : MonoBehaviour
     public void ToggleButtonContinue(bool value)
     {
         buttonContinue.SetActive(value);
-    }
-
-    private void DisplayDisciplineScreen()
-    {
-
     }
 
     public void SelectCause(int index)

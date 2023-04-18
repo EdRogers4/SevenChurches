@@ -11,10 +11,14 @@ public class AnimatorEvents : MonoBehaviour
         animatorScreenPrompt.SetBool("isShow", false);
         scriptScreenManager.ToggleScreenPromptOff();
     }
-    
+
     public void ToggleButtonContinue()
     {
         animatorScreenPrompt.speed = 0;
-        scriptScreenManager.ToggleButtonContinue(true);
-    }    
+
+        if (scriptScreenManager.progressState <= 2)
+        {
+            scriptScreenManager.ToggleButtonContinue(true);
+        }
+    }
 }
