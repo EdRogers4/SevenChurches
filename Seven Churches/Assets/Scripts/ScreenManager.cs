@@ -93,8 +93,11 @@ public class ScreenManager : MonoBehaviour
     [SerializeField] private Image imageHomeShell;
     [SerializeField] private Image imageHomeCore;
     [SerializeField] private Image imageHomeTree;
+    [SerializeField] private Image imageHomeTextChurch;
+    [SerializeField] private Image imageCrosshair;
     [SerializeField] private Button[] buttonNavigation;
     [SerializeField] private Sprite[] spriteNavigationLocked;
+    private Color colorLocked = new Color(1f, 1f, 1f, 0.35f);
 
     private void Start()
     {
@@ -147,8 +150,11 @@ public class ScreenManager : MonoBehaviour
                     scriptSelectionManager.UpdateHomeText(dataShell[0] - 1);
                 }
 
-                QuestionText();
-                SetButtonsOnScreen();
+                if (!isHome)
+                {
+                    QuestionText();
+                    SetButtonsOnScreen();
+                }
             }
         }
     }
@@ -275,8 +281,11 @@ public class ScreenManager : MonoBehaviour
             ToggleButtonPrompt(false);
         }
 
-        QuestionText();
-        SetButtonsOnScreen();
+        if (!isHome)
+        {
+            QuestionText();
+            SetButtonsOnScreen();
+        }
     }    
 
     public void PreviousScreen()
@@ -293,8 +302,11 @@ public class ScreenManager : MonoBehaviour
             buttonBack.SetActive(false);
         }
 
-        QuestionText();
-        SetButtonsOnScreen();
+        if (!isHome)
+        {
+            QuestionText();
+            SetButtonsOnScreen();
+        }
     }
 
     public void ButtonMission(int index)
@@ -479,9 +491,10 @@ public class ScreenManager : MonoBehaviour
 
     public void SelectCause(int index)
     {
+        currentCause = index;
+
         if (!isHome)
         {
-            currentCause = index;
             UpdateData(0, currentCause);
 
             if (!imageSelect.activeSelf)
@@ -584,6 +597,7 @@ public class ScreenManager : MonoBehaviour
         isHome = true;
         questionObject.SetActive(false);
         buttonBack.SetActive(false);
+        buttonContinue.SetActive(false);
 
         if (isChurch)
         {
@@ -595,10 +609,13 @@ public class ScreenManager : MonoBehaviour
         }
         else
         {
+            imageHomeTextChurch.color = colorLocked;
+            imageCrosshair.color = colorLocked;
+
             for (int i = 0; i < 2; i++)
             {
-                buttonNavigation[i].image.sprite = spriteNavigationLocked[i];
                 buttonNavigation[i].enabled = false;
+                buttonNavigation[i].image.color = colorLocked;
             }
         }
 

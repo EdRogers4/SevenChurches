@@ -290,7 +290,7 @@ public class SelectionManager : MonoBehaviour
 
     public void UpdateHomeText(int index)
     {
-		scriptScreenManager.SetHomeText(textChurch[index], textLeader[index], textObjective[index], animal[index]);
+		scriptScreenManager.SetHomeText(textChurch[index], textLeader[index], textObjective[index + 1], animal[index]);
     }
 
     public void CloseApplication()
