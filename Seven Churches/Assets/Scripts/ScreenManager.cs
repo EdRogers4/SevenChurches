@@ -12,6 +12,7 @@ public class ScreenManager : MonoBehaviour
     [SerializeField] private GameObject[] screens;
     [SerializeField] private GameObject buttonContinue;
     [SerializeField] private GameObject buttonBack;
+    [SerializeField] private GameObject buttonHome;
 
     [Header("Causes & Disciplines")]
     [SerializeField] private GameObject imageSelect;
@@ -80,6 +81,7 @@ public class ScreenManager : MonoBehaviour
     private int currentMission;
 
     [Header("Home")]
+    private bool isHome;
     [SerializeField] private TextMeshProUGUI textHomeChurch;
     [SerializeField] private TextMeshProUGUI textHomeLeader;
     [SerializeField] private TextMeshProUGUI textHomeObjective;
@@ -91,6 +93,8 @@ public class ScreenManager : MonoBehaviour
     [SerializeField] private Image imageHomeShell;
     [SerializeField] private Image imageHomeCore;
     [SerializeField] private Image imageHomeTree;
+    [SerializeField] private Button[] buttonNavigation;
+    [SerializeField] private Sprite[] spriteNavigationLocked;
 
     private void Start()
     {
@@ -311,6 +315,69 @@ public class ScreenManager : MonoBehaviour
         }
     }
 
+    public void ButtonNavigation(int index)
+    {
+        screens[currentScreen].SetActive(false);
+        currentScreen = index;
+        screens[currentScreen].SetActive(true);
+
+        if (currentScreen == 0)
+        {
+            ResetCauseSelection();
+        }
+        else if (currentScreen == 1)
+        {
+            buttonBack.SetActive(true);
+        }
+        else if (currentScreen == 2)
+        {
+            ResetDisciplineSelection();
+        }
+        else if (currentScreen == 4)
+        {
+            if (!churchButtons.activeSelf)
+            {
+                churchButtons.SetActive(true);
+            }
+        }
+
+        if (currentScreen == 6)
+        {
+            buttonHome.SetActive(false);
+
+            if (buttonContinue.activeSelf)
+            {
+                buttonContinue.SetActive(false);
+            }
+        }
+        else
+        {
+            buttonHome.SetActive(true);
+        }    
+    }
+
+    public void ResetCauseSelection()
+    {
+        imageSelect.SetActive(false);
+
+        for (int i = 0; i < imageSymbolCause.Length; i++)
+        {
+            imageSymbolCause[i].color = colorDefaultSymbol;
+            imageButtonCause[i].color = colorDefaultStart;
+        }
+    }
+    
+    public void ResetDisciplineSelection()
+    {
+        imageSelect2.SetActive(false);
+
+        for (int i = 0; i < imageSymbolDiscipline.Length; i++)
+        {
+            imageSymbolDiscipline[i].color = colorDefaultSymbol;
+            imageButtonDiscipline[i].color = colorDefaultStart;
+        }
+    }
+
     public void ToggleScreenPromptOff()
     {
         screenPrompt.SetActive(false);
@@ -412,23 +479,29 @@ public class ScreenManager : MonoBehaviour
 
     public void SelectCause(int index)
     {
-        currentCause = index;
-        UpdateData(0, currentCause);
-        imageDisciplineColors.sprite = spriteDisciplineColors[currentCause];
-
-        if (!imageSelect.activeSelf)
+        if (!isHome)
         {
-            imageSelect.SetActive(true);
-        }
+            currentCause = index;
+            UpdateData(0, currentCause);
 
-        if (!buttonContinue.activeSelf)
+            if (!imageSelect.activeSelf)
+            {
+                imageSelect.SetActive(true);
+            }
+
+            if (!buttonContinue.activeSelf)
+            {
+                buttonContinue.SetActive(true);
+            }
+
+            imageSelect.transform.position = imageButtonCause[index].transform.position;
+            imageSymbolCause[currentCause].color = Color.white;
+            imageButtonCause[currentCause].color = new Color(1f, 1f, 1f, 0.24f);
+        }
+        else
         {
-            buttonContinue.SetActive(true);
+            ButtonNavigation(1);
         }
-
-        imageSelect.transform.position = imageButtonCause[index].transform.position;
-        imageSymbolCause[currentCause].color = Color.white;
-        imageButtonCause[currentCause].color = new Color(1f, 1f, 1f, 0.24f);
 
         for (int i = 0; i < imageSymbolCause.Length; i++)
         {
@@ -439,26 +512,30 @@ public class ScreenManager : MonoBehaviour
             }
         }
 
+        imageDisciplineColors.sprite = spriteDisciplineColors[currentCause];
         imageCauseDescription.sprite = spriteCauseDescription[currentCause];
     }
 
     public void SelectDiscipline(int index)
     {
-        currentDiscipline = index;
-        UpdateData(1, currentDiscipline);
-        if (!imageSelect2.activeSelf)
+        if (!isHome)
         {
-            imageSelect2.SetActive(true);
-        }
+            currentDiscipline = index;
+            UpdateData(1, currentDiscipline);
+            if (!imageSelect2.activeSelf)
+            {
+                imageSelect2.SetActive(true);
+            }
 
-        if (!buttonContinue.activeSelf)
-        {
-            buttonContinue.SetActive(true);
-        }
+            if (!buttonContinue.activeSelf)
+            {
+                buttonContinue.SetActive(true);
+            }
 
-        imageSelect2.transform.position = imageButtonDiscipline[currentDiscipline].transform.position;
-        imageSymbolDiscipline[currentDiscipline].color = Color.white;
-        imageButtonDiscipline[currentDiscipline].color = new Color(1f, 1f, 1f, 0.24f);
+            imageSelect2.transform.position = imageButtonDiscipline[currentDiscipline].transform.position;
+            imageSymbolDiscipline[currentDiscipline].color = Color.white;
+            imageButtonDiscipline[currentDiscipline].color = new Color(1f, 1f, 1f, 0.24f);
+        }
 
         for (int i = 0; i < imageSymbolDiscipline.Length; i++)
         {
@@ -504,6 +581,10 @@ public class ScreenManager : MonoBehaviour
 
     public void SetHomeText(string church, string leader, string objective, Sprite animal)
     {
+        isHome = true;
+        questionObject.SetActive(false);
+        buttonBack.SetActive(false);
+
         if (isChurch)
         {
             textHomeChurch.text = church;
@@ -511,6 +592,14 @@ public class ScreenManager : MonoBehaviour
             textHomeObjective.text = objective;
             imageHomeAnimal.sprite = animal;
             textHomeMission.text = stringMission[currentMission - 1];
+        }
+        else
+        {
+            for (int i = 0; i < 2; i++)
+            {
+                buttonNavigation[i].image.sprite = spriteNavigationLocked[i];
+                buttonNavigation[i].enabled = false;
+            }
         }
 
         textHomeShell.text = textShell.text = stringCause[dataShell[0]] + " | " + stringDiscipline[dataShell[1]];
