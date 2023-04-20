@@ -600,7 +600,7 @@ public class ScreenManager : MonoBehaviour
         questionObject.SetActive(false);
         buttonBack.SetActive(false);
         buttonContinue.SetActive(false);
-        scriptMap.SetAura();
+        scriptMap.SetYourChart();
 
         if (isChurch)
         {
