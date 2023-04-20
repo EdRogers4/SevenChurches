@@ -9,6 +9,7 @@ public class ScreenManager : MonoBehaviour
 {
     [Header("General")]
     [SerializeField] private SelectionManager scriptSelectionManager;
+    [SerializeField] private Map scriptMap;
     [SerializeField] private GameObject[] screens;
     [SerializeField] private GameObject buttonContinue;
     [SerializeField] private GameObject buttonBack;
@@ -35,9 +36,9 @@ public class ScreenManager : MonoBehaviour
 
     [Header("Aura")]
     public int progressState;
-    [SerializeField] private int[] dataCore;
-    [SerializeField] private int[] dataShell;
-    [SerializeField] private int[] dataTree;
+    public int[] dataCore;
+    public int[] dataShell;
+    public int[] dataTree;
     [SerializeField] private Image auraScreen;
     [SerializeField] private Sprite[] auraSprite;
     [SerializeField] private TextMeshProUGUI textCore;
@@ -55,7 +56,7 @@ public class ScreenManager : MonoBehaviour
     [SerializeField] private Sprite[] spriteTree;
     [SerializeField] private string[] stringCause;
     [SerializeField] private string[] stringDiscipline;
-    private bool isTree;
+    public bool isTree;
 
     [Header("Screen Prompt")]
     [SerializeField] private GameObject screenPrompt;
@@ -82,6 +83,7 @@ public class ScreenManager : MonoBehaviour
 
     [Header("Home")]
     private bool isHome;
+    public TextMeshProUGUI textTeamCode;
     [SerializeField] private TextMeshProUGUI textHomeChurch;
     [SerializeField] private TextMeshProUGUI textHomeLeader;
     [SerializeField] private TextMeshProUGUI textHomeObjective;
@@ -598,6 +600,7 @@ public class ScreenManager : MonoBehaviour
         questionObject.SetActive(false);
         buttonBack.SetActive(false);
         buttonContinue.SetActive(false);
+        scriptMap.SetAura();
 
         if (isChurch)
         {
