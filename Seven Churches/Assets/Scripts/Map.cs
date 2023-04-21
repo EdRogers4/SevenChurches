@@ -6,25 +6,56 @@ using TMPro;
 
 public class Map : MonoBehaviour
 {
+    public int[] indexAura;
     [SerializeField] private ScreenManager screenManager;
+    [SerializeField] private Team scriptTeam;
     [SerializeField] private GameObject[] arrow;
     [SerializeField] private GameObject[] color;
     [SerializeField] private Image[] imageArrow;
     [SerializeField] private Image[] imageColor;
     [SerializeField] private Sprite[] spriteColor;
     [SerializeField] private RectTransform[] transformArrow;
-    [SerializeField] private int[] indexAura;
     [SerializeField] private Button[] buttonChart;
     [SerializeField] private Sprite[] spriteButtonUnselected;
     [SerializeField] private Sprite[] spriteButtonSelected;
     [SerializeField] private TextMeshProUGUI[] textTitle;
     [SerializeField] private TextMeshProUGUI[] textRole;
-    [SerializeField] private string[] stringRole;
+    public string[] stringRole;
     private float rotationFirstColor = -265f;
     private float rotationInterval = 8.5714f;
     private int currentChart;
     private bool isSetCode;
+    private bool isSkipThisStep;
 
+    private void SetTeamCode()
+    {
+        isSetCode = true;
+        screenManager.textTeamCode.text = "team code: ";
+
+        for (int i = 0; i < indexAura.Length; i++)
+        {
+            if (!screenManager.isTree && i == 2)
+            {
+                screenManager.textTeamCode.text += "00";
+                isSkipThisStep = true;
+            }
+            else if (indexAura[i] < 10)
+            {
+                screenManager.textTeamCode.text += "0";
+            }
+
+            if (!isSkipThisStep)
+            {
+                screenManager.textTeamCode.text += indexAura[i];
+            }
+            else
+            {
+                isSkipThisStep = false;
+            }
+        }
+
+        scriptTeam.UpdateUserSlot();
+    }
     public void SetYourChart()
     {
         currentChart = 0;
@@ -48,23 +79,7 @@ public class Map : MonoBehaviour
 
         if (!isSetCode)
         {
-            isSetCode = true;
-            screenManager.textTeamCode.text = "team code: ";
-
-            for (int i = 0; i < indexAura.Length; i++)
-            {
-                if (!screenManager.isTree && i == 2)
-                {
-                    screenManager.textTeamCode.text += "00";
-                }
-
-                if (indexAura[i] < 10)
-                {
-                    screenManager.textTeamCode.text += "0";
-                }
-
-                screenManager.textTeamCode.text += indexAura[i];
-            }
+            SetTeamCode();
         }
 
         for (int i = 0; i < arrow.Length; i++)

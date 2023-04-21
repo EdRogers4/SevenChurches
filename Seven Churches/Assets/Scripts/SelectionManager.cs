@@ -12,7 +12,8 @@ public class SelectionManager : MonoBehaviour
 	[SerializeField] private Animator animatorPrompt;
 	[SerializeField] private AudioClip[] song;
 	[SerializeField] private AudioClip click;
-	[SerializeField] private Sprite[] animal;
+	public Sprite[] animal;
+	public Sprite none;
 	[SerializeField] private Sprite noAnimal;
 	[SerializeField] private TextMeshProUGUI[] textObjects;
 	[SerializeField] private string titleChurch;

@@ -14,6 +14,7 @@ public class ScreenManager : MonoBehaviour
     [SerializeField] private GameObject buttonContinue;
     [SerializeField] private GameObject buttonBack;
     [SerializeField] private GameObject buttonHome;
+    [SerializeField] private RectTransform[] transformQuestion;
 
     [Header("Causes & Disciplines")]
     [SerializeField] private GameObject imageSelect;
@@ -26,6 +27,7 @@ public class ScreenManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textContinue;
     [SerializeField] private TextMeshProUGUI textQuestion;
     [SerializeField] private GameObject questionObject;
+    [SerializeField] private RectTransform questionObjectTransform;
     [SerializeField] private Sprite[] spriteDisciplineColors;
     [SerializeField] private Sprite[] spriteCauseDescription;
     [SerializeField] private int currentScreen;
@@ -51,9 +53,9 @@ public class ScreenManager : MonoBehaviour
     [SerializeField] private GameObject shell;
     [SerializeField] private GameObject core;
     [SerializeField] private GameObject tree;
-    [SerializeField] private Sprite[] spriteCore;
-    [SerializeField] private Sprite[] spriteShell;
-    [SerializeField] private Sprite[] spriteTree;
+    public Sprite[] spriteCore;
+    public Sprite[] spriteShell;
+    public Sprite[] spriteTree;
     [SerializeField] private string[] stringCause;
     [SerializeField] private string[] stringDiscipline;
     public bool isTree;
@@ -72,7 +74,7 @@ public class ScreenManager : MonoBehaviour
     [Header("Church")]
     [SerializeField] private Button[] buttonChurch;
     [SerializeField] private GameObject churchButtons;
-    private bool isChurch;
+    public bool isChurch;
 
     [Header("Missions")]
     [SerializeField] private Button[] buttonMission;
@@ -105,6 +107,7 @@ public class ScreenManager : MonoBehaviour
     {
         colorDefaultSymbol = imageSymbolCause[0].color;
         screens[0].SetActive(true);
+        QuestionText();
 
         for (int i = 0; i < missionText.Length; i++)
         {
@@ -439,9 +442,11 @@ public class ScreenManager : MonoBehaviour
                     {
                         case 0:
                             textQuestion.text = "What is your cause?";
+                            questionObjectTransform.anchoredPosition = transformQuestion[0].localPosition;
                             break;
                         case 2:
                             textQuestion.text = "What negative emotion do you embrace most?";
+                            questionObjectTransform.anchoredPosition = transformQuestion[1].localPosition;
                             break;
                     }
                     break;
@@ -450,9 +455,11 @@ public class ScreenManager : MonoBehaviour
                     {
                         case 0:
                             textQuestion.text = "What is your mode of expression?";
+                            questionObjectTransform.anchoredPosition = transformQuestion[0].localPosition;
                             break;
                         case 2:
                             textQuestion.text = "What negative emotion do you express most?";
+                            questionObjectTransform.anchoredPosition = transformQuestion[1].localPosition;
                             break;
                     }
                     break;
@@ -461,9 +468,11 @@ public class ScreenManager : MonoBehaviour
                     {
                         case 0:
                             textQuestion.text = "What is your sidekick's cause?";
+                            questionObjectTransform.anchoredPosition = transformQuestion[0].localPosition;
                             break;
                         case 2:
                             textQuestion.text = "What negative emotion does your sidekick embrace most?";
+                            questionObjectTransform.anchoredPosition = transformQuestion[1].localPosition;
                             break;
                     }
                     break;
@@ -472,9 +481,11 @@ public class ScreenManager : MonoBehaviour
                     {
                         case 4:
                             textQuestion.text = "Your spirit is assigned to the angel of this church.";
+                            questionObjectTransform.anchoredPosition = transformQuestion[2].localPosition;
                             break;
                         case 5:
                             textQuestion.text = "Choose one to overcome and they will speak to you.";
+                            questionObjectTransform.anchoredPosition = transformQuestion[3].localPosition;
                             break;
                     }
                     break;
