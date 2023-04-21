@@ -32,25 +32,40 @@ public class Map : MonoBehaviour
         isSetCode = true;
         screenManager.textTeamCode.text = "team code: ";
 
-        for (int i = 0; i < indexAura.Length; i++)
+        for (int i = 0; i < 4; i++)
         {
             if (!screenManager.isTree && i == 2)
             {
                 screenManager.textTeamCode.text += "00";
                 isSkipThisStep = true;
             }
-            else if (indexAura[i] < 10)
+            else if (i < indexAura.Length && indexAura[i] < 10)
             {
                 screenManager.textTeamCode.text += "0";
             }
 
-            if (!isSkipThisStep)
+            if (i < indexAura.Length)
             {
-                screenManager.textTeamCode.text += indexAura[i];
+                if (!isSkipThisStep)
+                {
+                    screenManager.textTeamCode.text += indexAura[i];
+                }
+                else
+                {
+                    isSkipThisStep = false;
+                }
             }
             else
             {
-                isSkipThisStep = false;
+                if (!screenManager.isChurch)
+                {
+                    screenManager.textTeamCode.text += "0";
+                }
+                else
+                {
+                    var index = (int)Mathf.Floor(indexAura[0] / 6f);
+                    screenManager.textTeamCode.text += index;
+                }
             }
         }
 

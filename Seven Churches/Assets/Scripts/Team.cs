@@ -28,7 +28,9 @@ public class Team : MonoBehaviour
     [SerializeField] private TMP_InputField inputMemberName;
     private int currentSlot;
     [SerializeField] private string[] stringCodeSection;
+    private string stringChurchSection;
     [SerializeField] private int[] intCodeSection;
+    private int intChurchSection;
     private int isSlot2;
     private int isSlot3;
     private int isSlot4;
@@ -41,6 +43,9 @@ public class Team : MonoBehaviour
     private int slot4Data0;
     private int slot4Data1;
     private int slot4Data2;
+    private int slot2Church;
+    private int slot3Church;
+    private int slot4Church;
     private string slot2Name;
     private string slot3Name;
     private string slot4Name;
@@ -99,7 +104,9 @@ public class Team : MonoBehaviour
             stringCodeSection[i] = "";
         }
 
-        if (inputMemberCode.text.Length == 6 && inputMemberName.text.Length >= 1)
+        stringChurchSection = "";
+
+        if (inputMemberCode.text.Length == 7)
         {
             stringCodeSection[0] += inputMemberCode.text[0];
             stringCodeSection[0] += inputMemberCode.text[1];
@@ -107,14 +114,19 @@ public class Team : MonoBehaviour
             stringCodeSection[1] += inputMemberCode.text[3];
             stringCodeSection[2] += inputMemberCode.text[4];
             stringCodeSection[2] += inputMemberCode.text[5];
+            stringChurchSection += inputMemberCode.text[6];
 
             for (int i = 0; i < intCodeSection.Length; i++)
             {
                 intCodeSection[i] = int.Parse(stringCodeSection[i]);
             }
+
+            intChurchSection = int.Parse(stringChurchSection);
+            Debug.Log("inChurchSection: " + intChurchSection);
         }
 
-        if ((intCodeSection[0] > 0 && intCodeSection[0] <= 42) && (intCodeSection[1] > 0 && intCodeSection[1] <= 42) && (intCodeSection[2] >= 0 && intCodeSection[0] <= 42))
+        if ((intCodeSection[0] > 0 && intCodeSection[0] <= 42) && (intCodeSection[1] > 0 && intCodeSection[1] <= 42) 
+            && (intCodeSection[2] >= 0 && intCodeSection[2] <= 42) && (intChurchSection < 8 && intChurchSection >= 0))
         {
             if (!memberSlot[currentSlot + 1].activeSelf)
             {
@@ -134,8 +146,15 @@ public class Team : MonoBehaviour
                 imageTree[currentSlot + 1].enabled = false;
             }
 
-            var index = (int)Mathf.Floor(intCodeSection[0] / 6.0f);
-            imageAnimal[currentSlot + 1].sprite = scriptSelectionManager.animal[index];
+            if (intChurchSection > 0)
+            {
+                imageAnimal[currentSlot + 1].sprite = scriptSelectionManager.animal[intChurchSection - 1];
+            }
+            else
+            {
+                imageAnimal[currentSlot + 1].sprite = scriptSelectionManager.none;
+            }
+
             textMemberRole[currentSlot + 1].text = scriptMap.stringRole[intCodeSection[0]];
             textMemberName[currentSlot + 1].text = inputMemberName.text;
 
@@ -147,6 +166,7 @@ public class Team : MonoBehaviour
                     slot2Data1 = intCodeSection[1];
                     slot2Data2 = intCodeSection[2];
                     slot2Name = inputMemberName.text;
+                    slot2Church = intChurchSection;
                     break;
                 case 2:
                     isSlot3 = 1;
@@ -154,6 +174,7 @@ public class Team : MonoBehaviour
                     slot3Data1 = intCodeSection[1];
                     slot3Data2 = intCodeSection[2];
                     slot3Name = inputMemberName.text;
+                    slot3Church = intChurchSection;
                     break;
                 case 3:
                     isSlot4 = 1;
@@ -161,6 +182,7 @@ public class Team : MonoBehaviour
                     slot4Data1 = intCodeSection[1];
                     slot4Data2 = intCodeSection[2];
                     slot4Name = inputMemberName.text;
+                    slot4Church = intChurchSection;
                     break;
             }
         }
@@ -181,6 +203,7 @@ public class Team : MonoBehaviour
                 slot2Data1 = 0;
                 slot2Data2 = 0;
                 slot2Name = "Member Name";
+                slot2Church = 0;
                 break;
             case 2:
                 isSlot3 = 0;
@@ -188,6 +211,7 @@ public class Team : MonoBehaviour
                 slot3Data1 = 0;
                 slot3Data2 = 0;
                 slot3Name = "Member Name";
+                slot3Church = 0;
                 break;
             case 3:
                 isSlot4 = 0;
@@ -195,6 +219,7 @@ public class Team : MonoBehaviour
                 slot4Data1 = 0;
                 slot4Data2 = 0;
                 slot4Name = "Member Name";
+                slot4Church = 0;
                 break;
         }
     }
@@ -216,6 +241,9 @@ public class Team : MonoBehaviour
         PlayerPrefs.SetString("slot2Name", slot2Name);
         PlayerPrefs.SetString("slot3Name", slot3Name);
         PlayerPrefs.SetString("slot4Name", slot4Name);
+        PlayerPrefs.SetInt("slot2Church", slot2Church);
+        PlayerPrefs.SetInt("slot3Church", slot3Church);
+        PlayerPrefs.SetInt("slot4Church", slot4Church);
     }
 
     public void ButtonLoad()
@@ -238,8 +266,16 @@ public class Team : MonoBehaviour
                     imageTree[i + 1].enabled = false;
                 }
 
-                var index = (int)Mathf.Floor(PlayerPrefs.GetInt("slot" + (i + 2) + "Data0") / 6.0f);
-                imageAnimal[i + 1].sprite = scriptSelectionManager.animal[index];
+                if ((PlayerPrefs.GetInt("slot" + (i + 2) + "Church")) == 0)
+                {
+                    imageAnimal[i + 1].sprite = scriptSelectionManager.none;
+                }
+                else
+                {
+                    imageAnimal[i + 1].sprite = scriptSelectionManager.animal[(PlayerPrefs.GetInt("slot" + (i + 2) + "Church"))];
+                    Debug.Log("Church index: " + PlayerPrefs.GetInt("slot" + (i + 2) + "Church"));
+                }
+
                 textMemberRole[i + 1].text = scriptMap.stringRole[PlayerPrefs.GetInt("slot" + (i + 2) + "Data0")];
                 textMemberName[i + 1].text = PlayerPrefs.GetString("slot" + (i + 2) + "Name");
             }
