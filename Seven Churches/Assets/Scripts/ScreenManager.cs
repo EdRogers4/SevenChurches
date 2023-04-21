@@ -219,9 +219,6 @@ public class ScreenManager : MonoBehaviour
 
     public void ButtonNo()
     {
-
-        Debug.Log("Progress State: " + progressState);
-
         switch (progressState)
         {
             case 1:

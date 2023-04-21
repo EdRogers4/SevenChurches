@@ -6,6 +6,7 @@ public class AnimatorEvents : MonoBehaviour
 {
     [SerializeField] private ScreenManager scriptScreenManager;
     [SerializeField] private Animator animatorScreenPrompt;
+    [SerializeField] private Animator animatorTextTeamSaved;
     public void StopShowScreenPrompt()
     {
         animatorScreenPrompt.SetBool("isShow", false);
@@ -20,5 +21,10 @@ public class AnimatorEvents : MonoBehaviour
         {
             scriptScreenManager.ToggleButtonContinue(true);
         }
+    }
+
+    public void StopShowOnTextTeamSaved()
+    {
+        animatorTextTeamSaved.SetBool("isShow", false);
     }
 }

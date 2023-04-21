@@ -107,6 +107,10 @@ public class Map : MonoBehaviour
                     color[i].SetActive(false);
                     break;
                 }
+                else
+                {
+                    textRole[i].text = "";
+                }
 
                 arrow[i].SetActive(true);
                 color[i].SetActive(true);
@@ -244,6 +248,58 @@ public class Map : MonoBehaviour
     {
         currentChart = 3;
         SetButtonSprites();
+        textTitle[0].text = "You";
+        textTitle[1].text = scriptTeam.slot2Name;
+        textTitle[2].text = scriptTeam.slot3Name;
+        textTitle[3].text = scriptTeam.slot4Name;
+
+        if (scriptTeam.isSlot2 >= 1)
+        {
+            arrow[1].SetActive(true);
+            color[1].SetActive(true);
+            textRole[1].text = stringRole[scriptTeam.slot2Data0];
+            imageColor[1].sprite = spriteColor[scriptTeam.slot2Data0 - 1];
+            var newRotation = rotationFirstColor + (((float)scriptTeam.slot2Data0 - 1) * rotationInterval);
+            transformArrow[1].rotation = Quaternion.Euler(0f, 0f, newRotation);
+        }
+        else
+        {
+            arrow[1].SetActive(false);
+            color[1].SetActive(false);
+            textRole[1].text = "";
+        }
+
+        if (scriptTeam.isSlot3 >= 1)
+        {
+            arrow[2].SetActive(true);
+            color[2].SetActive(true);
+            textRole[2].text = stringRole[scriptTeam.slot3Data0];
+            imageColor[2].sprite = spriteColor[scriptTeam.slot3Data0 - 1];
+            var newRotation = rotationFirstColor + (((float)scriptTeam.slot3Data0 - 1) * rotationInterval);
+            transformArrow[2].rotation = Quaternion.Euler(0f, 0f, newRotation);
+        }
+        else
+        {
+            arrow[2].SetActive(false);
+            color[2].SetActive(false);
+            textRole[2].text = "";
+        }
+
+        if (scriptTeam.isSlot4 >= 1)
+        {
+            arrow[3].SetActive(true);
+            color[3].SetActive(true);
+            textRole[3].text = stringRole[scriptTeam.slot3Data0];
+            imageColor[3].sprite = spriteColor[scriptTeam.slot3Data0 - 1];
+            var newRotation = rotationFirstColor + (((float)scriptTeam.slot3Data0 - 1) * rotationInterval);
+            transformArrow[3].rotation = Quaternion.Euler(0f, 0f, newRotation);
+        }
+        else
+        {
+            arrow[3].SetActive(false);
+            color[3].SetActive(false);
+            textRole[3].text = "";
+        }
     }
 
     private void SetButtonSprites()
