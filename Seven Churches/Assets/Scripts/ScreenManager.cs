@@ -477,11 +477,11 @@ public class ScreenManager : MonoBehaviour
                     switch (currentScreen)
                     {
                         case 4:
-                            textQuestion.text = "Your spirit is assigned to the angel of this church.";
+                            textQuestion.text = "Seek in prayer to find out more about this church";
                             questionObjectTransform.anchoredPosition = transformQuestion[2].localPosition;
                             break;
                         case 5:
-                            textQuestion.text = "Choose one to overcome and they will speak to you.";
+                            textQuestion.text = "Choose one to overcome and they will speak to you";
                             questionObjectTransform.anchoredPosition = transformQuestion[3].localPosition;
                             break;
                     }
