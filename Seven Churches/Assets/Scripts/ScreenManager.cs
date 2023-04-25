@@ -481,7 +481,7 @@ public class ScreenManager : MonoBehaviour
                             questionObjectTransform.anchoredPosition = transformQuestion[2].localPosition;
                             break;
                         case 5:
-                            textQuestion.text = "Choose one to overcome and they will speak to you";
+                            textQuestion.text = "Which gift has God given you most?";
                             questionObjectTransform.anchoredPosition = transformQuestion[3].localPosition;
                             break;
                     }

@@ -21,7 +21,7 @@ public class Map : MonoBehaviour
     [SerializeField] private TextMeshProUGUI[] textTitle;
     [SerializeField] private TextMeshProUGUI[] textRole;
     public string[] stringRole;
-    private float rotationFirstColor = -265f;
+    private float rotationFirstColor = -291.5f;
     private float rotationInterval = 8.5714f;
     private int currentChart;
     private bool isSetCode;
@@ -88,9 +88,11 @@ public class Map : MonoBehaviour
         else
         {
             textTitle[2].text = "";
+            textRole[2].text = "";
         }
 
         textTitle[3].text = "";
+        textRole[3].text = "";
 
         if (!isSetCode)
         {
