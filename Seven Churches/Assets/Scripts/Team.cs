@@ -188,6 +188,8 @@ public class Team : MonoBehaviour
                     break;
             }
         }
+
+        inputMemberName.text = "";
     }
 
     public void ButtonClear()
