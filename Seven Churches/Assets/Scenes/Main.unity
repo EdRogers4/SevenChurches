@@ -4349,7 +4349,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 55}
+  m_AnchoredPosition: {x: 0, y: 85}
   m_SizeDelta: {x: 555, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &321465344
@@ -4415,7 +4415,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -6815,7 +6815,7 @@ MonoBehaviour:
   - "\u201CThey are so tremendously sane that it hurts my mind to think that.  To
     be on fire for them, you have to be so in love with Jesus that you are insane
     in a sobering way.\u201D \u2013 From the angel of The Second, whose name is Uriel"
-  - "\"He is the end of humankind.\" \u2013 From the second servant of the Kentucky
+  - "\"He is the end of humankind.\" \u2013 From the third servant of the Kentucky
     Church of Ephesus"
   - "\u201CI have heard them.  They are the loudest trumpet, And they are\u2026 So
     be it!  They are the best church of praise in the whole universe!!  So be it!!! 

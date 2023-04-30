@@ -255,7 +255,7 @@ public class ScreenManager : MonoBehaviour
                 imageButtonNo.sprite = spriteButtonNo[0];
                 break;
             case 2:
-                textButtonPrompt.text = "Do you want to be assigned to an angel of a church?";
+                textButtonPrompt.text = "The rest of this is from what I have heard in my prayer time.  Do you want to continue?";
                 imageButtonNo.sprite = spriteButtonNo[1];
                 break;
             case 3:
@@ -477,7 +477,7 @@ public class ScreenManager : MonoBehaviour
                     switch (currentScreen)
                     {
                         case 4:
-                            textQuestion.text = "Seek in prayer to find out more about this church";
+                            textQuestion.text = "Out of the seven churches, you are aligned to this church";
                             questionObjectTransform.anchoredPosition = transformQuestion[2].localPosition;
                             break;
                         case 5:
