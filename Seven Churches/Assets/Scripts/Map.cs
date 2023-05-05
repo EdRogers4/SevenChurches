@@ -187,8 +187,8 @@ public class Map : MonoBehaviour
         currentChart = 2;
         SetButtonSprites();
         textTitle[0].text = "SHELL";
-        textTitle[1].text = "Tone 1";
-        textTitle[2].text = "Tone 2";
+        textTitle[1].text = "TONE 1";
+        textTitle[2].text = "TONE 2";
         textTitle[3].text = "";
 
         for (int i = 0; i < arrow.Length; i++)
