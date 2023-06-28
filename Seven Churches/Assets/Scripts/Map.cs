@@ -32,7 +32,7 @@ public class Map : MonoBehaviour
         isSetCode = true;
         screenManager.textTeamCode.text = "team code: ";
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 6; i++)
         {
             if (!screenManager.isTree && i == 2)
             {
@@ -93,6 +93,10 @@ public class Map : MonoBehaviour
 
         textTitle[3].text = "";
         textRole[3].text = "";
+        textTitle[4].text = "";
+        textRole[4].text = "";
+        textTitle[5].text = "";
+        textRole[5].text = "";
 
         if (!isSetCode)
         {
@@ -138,6 +142,8 @@ public class Map : MonoBehaviour
         textTitle[1].text = "TWIN FLAME";
         textTitle[2].text = "";
         textTitle[3].text = "";
+        textTitle[4].text = "";
+        textTitle[5].text = "";
 
         for (int i = 0; i < arrow.Length; i++)
         {
@@ -190,6 +196,8 @@ public class Map : MonoBehaviour
         textTitle[1].text = "TONE 1";
         textTitle[2].text = "TONE 2";
         textTitle[3].text = "";
+        textTitle[4].text = "";
+        textTitle[5].text = "";
 
         for (int i = 0; i < arrow.Length; i++)
         {
@@ -254,6 +262,8 @@ public class Map : MonoBehaviour
         textTitle[1].text = scriptTeam.slot2Name;
         textTitle[2].text = scriptTeam.slot3Name;
         textTitle[3].text = scriptTeam.slot4Name;
+        textTitle[4].text = scriptTeam.slot5Name;
+        textTitle[5].text = scriptTeam.slot6Name;
 
         if (scriptTeam.isSlot2 >= 1)
         {
@@ -291,9 +301,9 @@ public class Map : MonoBehaviour
         {
             arrow[3].SetActive(true);
             color[3].SetActive(true);
-            textRole[3].text = stringRole[scriptTeam.slot3Data0];
-            imageColor[3].sprite = spriteColor[scriptTeam.slot3Data0 - 1];
-            var newRotation = rotationFirstColor + (((float)scriptTeam.slot3Data0 - 1) * rotationInterval);
+            textRole[3].text = stringRole[scriptTeam.slot4Data0];
+            imageColor[3].sprite = spriteColor[scriptTeam.slot4Data0 - 1];
+            var newRotation = rotationFirstColor + (((float)scriptTeam.slot4Data0 - 1) * rotationInterval);
             transformArrow[3].rotation = Quaternion.Euler(0f, 0f, newRotation);
         }
         else
@@ -301,6 +311,38 @@ public class Map : MonoBehaviour
             arrow[3].SetActive(false);
             color[3].SetActive(false);
             textRole[3].text = "";
+        }
+
+        if (scriptTeam.isSlot5 >= 1)
+        {
+            arrow[4].SetActive(true);
+            color[4].SetActive(true);
+            textRole[4].text = stringRole[scriptTeam.slot5Data0];
+            imageColor[4].sprite = spriteColor[scriptTeam.slot5Data0 - 1];
+            var newRotation = rotationFirstColor + (((float)scriptTeam.slot5Data0 - 1) * rotationInterval);
+            transformArrow[4].rotation = Quaternion.Euler(0f, 0f, newRotation);
+        }
+        else
+        {
+            arrow[4].SetActive(false);
+            color[4].SetActive(false);
+            textRole[4].text = "";
+        }
+
+        if (scriptTeam.isSlot6 >= 1)
+        {
+            arrow[5].SetActive(true);
+            color[5].SetActive(true);
+            textRole[5].text = stringRole[scriptTeam.slot6Data0];
+            imageColor[5].sprite = spriteColor[scriptTeam.slot6Data0 - 1];
+            var newRotation = rotationFirstColor + (((float)scriptTeam.slot6Data0 - 1) * rotationInterval);
+            transformArrow[5].rotation = Quaternion.Euler(0f, 0f, newRotation);
+        }
+        else
+        {
+            arrow[5].SetActive(false);
+            color[5].SetActive(false);
+            textRole[5].text = "";
         }
     }
 

@@ -22,8 +22,8 @@ public class Team : MonoBehaviour
     [SerializeField] private Button[] buttonSlot;
 
     [Header("Submit")]
-    [SerializeField] private Sprite[] spriteButtonSlotUnselected;
-    [SerializeField] private Sprite[] spriteButtonSlotSelected;
+    [SerializeField] private Sprite spriteButtonSlotUnselected;
+    [SerializeField] private Sprite spriteButtonSlotSelected;
     [SerializeField] private TMP_InputField inputMemberCode;
     [SerializeField] private TMP_InputField inputMemberName;
     private int currentSlot;
@@ -34,6 +34,8 @@ public class Team : MonoBehaviour
     public int isSlot2;
     public int isSlot3;
     public int isSlot4;
+    public int isSlot5;
+    public int isSlot6;
     public int slot2Data0;
     public int slot2Data1;
     public int slot2Data2;
@@ -43,12 +45,22 @@ public class Team : MonoBehaviour
     public int slot4Data0;
     public int slot4Data1;
     public int slot4Data2;
+    public int slot5Data0;
+    public int slot5Data1;
+    public int slot5Data2;
+    public int slot6Data0;
+    public int slot6Data1;
+    public int slot6Data2;
     private int slot2Church;
     private int slot3Church;
     private int slot4Church;
+    private int slot5Church;
+    private int slot6Church;
     public string slot2Name;
     public string slot3Name;
     public string slot4Name;
+    public string slot5Name;
+    public string slot6Name;
 
     [Header("Animation")]
     [SerializeField] private Animator animatorTextTeamSaved;
@@ -91,11 +103,11 @@ public class Team : MonoBehaviour
         {
             if (i == currentSlot)
             {
-                buttonSlot[i].image.sprite = spriteButtonSlotSelected[currentSlot];
+                buttonSlot[i].image.sprite = spriteButtonSlotSelected;
             }
             else
             {
-                buttonSlot[i].image.sprite = spriteButtonSlotUnselected[i];
+                buttonSlot[i].image.sprite = spriteButtonSlotUnselected;
             }
         }
     }
@@ -186,6 +198,22 @@ public class Team : MonoBehaviour
                     slot4Name = inputMemberName.text;
                     slot4Church = intChurchSection;
                     break;
+                case 4:
+                    isSlot5 = 1;
+                    slot5Data0 = intCodeSection[0];
+                    slot5Data1 = intCodeSection[1];
+                    slot5Data2 = intCodeSection[2];
+                    slot5Name = inputMemberName.text;
+                    slot5Church = intChurchSection;
+                    break;
+                case 5:
+                    isSlot6 = 1;
+                    slot6Data0 = intCodeSection[0];
+                    slot6Data1 = intCodeSection[1];
+                    slot6Data2 = intCodeSection[2];
+                    slot6Name = inputMemberName.text;
+                    slot6Church = intChurchSection;
+                    break;
             }
         }
 
@@ -225,6 +253,22 @@ public class Team : MonoBehaviour
                 slot4Name = "Member Name";
                 slot4Church = 0;
                 break;
+            case 4:
+                isSlot5 = 0;
+                slot5Data0 = 0;
+                slot5Data1 = 0;
+                slot5Data2 = 0;
+                slot5Name = "Member Name";
+                slot5Church = 0;
+                break;
+            case 5:
+                isSlot6 = 0;
+                slot6Data0 = 0;
+                slot6Data1 = 0;
+                slot6Data2 = 0;
+                slot6Name = "Member Name";
+                slot6Church = 0;
+                break;
         }
     }
 
@@ -233,6 +277,8 @@ public class Team : MonoBehaviour
         PlayerPrefs.SetInt("isSlot2", isSlot2);
         PlayerPrefs.SetInt("isSlot3", isSlot3);
         PlayerPrefs.SetInt("isSlot4", isSlot4);
+        PlayerPrefs.SetInt("isSlot5", isSlot5);
+        PlayerPrefs.SetInt("isSlot6", isSlot6);
         PlayerPrefs.SetInt("slot2Data0", slot2Data0);
         PlayerPrefs.SetInt("slot2Data1", slot2Data1);
         PlayerPrefs.SetInt("slot2Data2", slot2Data2);
@@ -242,12 +288,22 @@ public class Team : MonoBehaviour
         PlayerPrefs.SetInt("slot4Data0", slot4Data0);
         PlayerPrefs.SetInt("slot4Data1", slot4Data1);
         PlayerPrefs.SetInt("slot4Data2", slot4Data2);
+        PlayerPrefs.SetInt("slot5Data0", slot5Data0);
+        PlayerPrefs.SetInt("slot5Data1", slot5Data1);
+        PlayerPrefs.SetInt("slot5Data2", slot5Data2);
+        PlayerPrefs.SetInt("slot6Data0", slot6Data0);
+        PlayerPrefs.SetInt("slot6Data1", slot6Data1);
+        PlayerPrefs.SetInt("slot6Data2", slot6Data2);
         PlayerPrefs.SetString("slot2Name", slot2Name);
         PlayerPrefs.SetString("slot3Name", slot3Name);
         PlayerPrefs.SetString("slot4Name", slot4Name);
+        PlayerPrefs.SetString("slot5Name", slot5Name);
+        PlayerPrefs.SetString("slot6Name", slot6Name);
         PlayerPrefs.SetInt("slot2Church", slot2Church);
         PlayerPrefs.SetInt("slot3Church", slot3Church);
         PlayerPrefs.SetInt("slot4Church", slot4Church);
+        PlayerPrefs.SetInt("slot5Church", slot5Church);
+        PlayerPrefs.SetInt("slot6Church", slot6Church);
         animatorTextTeamSaved.SetBool("isShow", true);
     }
 
@@ -256,6 +312,8 @@ public class Team : MonoBehaviour
         isSlot2 = PlayerPrefs.GetInt("isSlot2");
         isSlot3 = PlayerPrefs.GetInt("isSlot3");
         isSlot4 = PlayerPrefs.GetInt("isSlot4");
+        isSlot5 = PlayerPrefs.GetInt("isSlot5");
+        isSlot6 = PlayerPrefs.GetInt("isSlot6");
         slot2Data0 = PlayerPrefs.GetInt("slot2Data0");
         slot2Data1 = PlayerPrefs.GetInt("slot2Data1");
         slot2Data2 = PlayerPrefs.GetInt("slot2Data2");
@@ -265,14 +323,24 @@ public class Team : MonoBehaviour
         slot4Data0 = PlayerPrefs.GetInt("slot4Data0");
         slot4Data1 = PlayerPrefs.GetInt("slot4Data1");
         slot4Data2 = PlayerPrefs.GetInt("slot4Data2");
+        slot5Data0 = PlayerPrefs.GetInt("slot5Data0");
+        slot5Data1 = PlayerPrefs.GetInt("slot5Data1");
+        slot5Data2 = PlayerPrefs.GetInt("slot5Data2");
+        slot6Data0 = PlayerPrefs.GetInt("slot6Data0");
+        slot6Data1 = PlayerPrefs.GetInt("slot6Data1");
+        slot6Data2 = PlayerPrefs.GetInt("slot6Data2");
         slot2Name = PlayerPrefs.GetString("slot2Name");
         slot3Name = PlayerPrefs.GetString("slot3Name");
         slot4Name = PlayerPrefs.GetString("slot4Name");
+        slot5Name = PlayerPrefs.GetString("slot5Name");
+        slot6Name = PlayerPrefs.GetString("slot6Name");
         slot2Church = PlayerPrefs.GetInt("slot2Church");
         slot3Church = PlayerPrefs.GetInt("slot3Church");
         slot4Church = PlayerPrefs.GetInt("slot4Church");
+        slot5Church = PlayerPrefs.GetInt("slot5Church");
+        slot6Church = PlayerPrefs.GetInt("slot6Church");
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 5; i++)
         {
             if ((PlayerPrefs.GetInt("isSlot" + (i + 2))) >= 1)
             {
